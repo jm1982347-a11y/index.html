@@ -1,0 +1,2327 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><base href="https://d16ilfvy4mv02r.cloudfront.net/workspaces/dXNIELGkOvo0sHJvHvnc0cHNu0y7d1td/6baadf0b-caf9-416f-b040-ff7d01931c8a/files/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CG Finanças — Hub Estratégico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --gold: #C9A840;
+    --gold-light: #D4B84A;
+    --gold-pale: #FBF4DC;
+    --brown: #1B3A2A;
+    --brown-mid: #2E6B4F;
+    --cream: #F8FAF8;
+    --beige: #EFF4F0;
+    --beige-dark: #DDE8E0;
+    --white: #FFFFFF;
+    --black: #0A0A0A;
+    --gray-100: #F4F7F5;
+    --gray-200: #E8EDEA;
+    --gray-300: #C8D4CC;
+    --gray-400: #8A9E94;
+    --gray-500: #607A6E;
+    --gray-600: #3E5A4E;
+    --gray-700: #243830;
+    --gray-800: #162820;
+    --sidebar-bg: #1B3A2A;
+    --sidebar-text: #C8D8C0;
+    --sidebar-active: #C9A840;
+    --card-bg: #FFFFFF;
+    --card-border: #EDEDEA;
+    --success: #2D6A4F;
+    --success-bg: #D8F3DC;
+    --danger: #9B2226;
+    --danger-bg: #FFDDD2;
+    --warning: #8B5E0A;
+    --warning-bg: #FFF3CD;
+    --info: #1D4E89;
+    --info-bg: #DCE8F8;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.12), 0 4px 10px rgba(0,0,0,0.06);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-lg: 16px;
+    --transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+  }
+  .dark {
+    --card-bg: #1E1A14;
+    --card-border: #2E2A20;
+    --cream: #0F0C08;
+    --beige: #1A1610;
+    --gray-100: #1A1610;
+    --gray-200: #2A2520;
+    --gray-300: #3A3530;
+    --black: #F0EAD6;
+    --sidebar-bg: #0A0804;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { font-size:14px; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--cream);
+    color: var(--gray-700);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  /* LAYOUT */
+  .app-layout { display:flex; min-height:100vh; }
+  /* SIDEBAR */
+  .sidebar {
+    width: 260px;
+    background: var(--sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top:0; left:0; bottom:0;
+    z-index: 100;
+    transition: var(--transition);
+  }
+  .sidebar-logo {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid rgba(201,168,64,0.2);
+  }
+  .logo-mark {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, #2E6B4F, #1B3A2A);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 4px 12px rgba(46,107,79,0.3);
+  }
+  .logo-text { display:flex; flex-direction:column; }
+  .logo-name { font-size:20px; font-weight:700; color: var(--gold-light); letter-spacing:-0.5px; }
+  .logo-tagline { font-size:10px; color: var(--sidebar-text); opacity:0.7; letter-spacing:1px; text-transform:uppercase; }
+  .client-switcher {
+    margin: 12px 16px;
+    background: rgba(201,168,64,0.1);
+    border: 1px solid rgba(201,168,64,0.2);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .client-switcher:hover { background: rgba(201,168,64,0.15); }
+  .client-label { font-size:10px; color: var(--sidebar-text); opacity:0.6; text-transform:uppercase; letter-spacing:1px; }
+  .client-name { font-size:13px; color: var(--sidebar-text); font-weight:600; display:flex; align-items:center; justify-content:space-between; }
+  .client-type { font-size:10px; padding: 2px 6px; background: rgba(201,168,64,0.2); color: var(--gold-light); border-radius:4px; }
+  .sidebar-nav { flex:1; overflow-y:auto; padding: 8px 0; }
+  .nav-section { padding: 8px 16px 4px; font-size:10px; color: rgba(200,184,150,0.4); text-transform:uppercase; letter-spacing:1.5px; font-weight:600; }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 16px;
+    color: var(--sidebar-text);
+    opacity: 0.7;
+    cursor: pointer;
+    transition: var(--transition);
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: 500;
+    position: relative;
+  }
+  .nav-item:hover { opacity:1; background: rgba(201,168,64,0.08); }
+  .nav-item.active {
+    opacity: 1;
+    color: var(--gold-light);
+    background: rgba(201,168,64,0.12);
+  }
+  .nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 4px; bottom: 4px;
+    width: 3px;
+    background: var(--gold-light);
+    border-radius: 0 3px 3px 0;
+  }
+  .nav-icon { font-size: 16px; width: 20px; text-align: center; }
+  .nav-badge {
+    margin-left: auto;
+    font-size: 10px;
+    padding: 2px 6px;
+    background: var(--gold-light);
+    color: var(--sidebar-bg);
+    border-radius: 10px;
+    font-weight: 700;
+  }
+  .sidebar-footer {
+    padding: 16px;
+    border-top: 1px solid rgba(201,168,64,0.15);
+  }
+  .sidebar-user {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .sidebar-user:hover { background: rgba(201,168,64,0.08); }
+  .user-avatar {
+    width: 34px; height: 34px;
+    background: linear-gradient(135deg, var(--gold), var(--brown));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700;
+    color: white;
+  }
+  .user-info { flex:1; }
+  .user-name { font-size:12px; color: var(--sidebar-text); font-weight:600; }
+  .user-role { font-size:10px; color: var(--sidebar-text); opacity:0.5; }
+  /* MAIN */
+  .main-content {
+    margin-left: 260px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  /* TOPBAR */
+  .topbar {
+    background: var(--white);
+    border-bottom: 1px solid var(--card-border);
+    padding: 0 24px;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 50;
+    box-shadow: var(--shadow-sm);
+  }
+  .topbar-left { display:flex; align-items:center; gap:16px; }
+  .page-title { font-size:16px; font-weight:700; color: var(--gray-700); }
+  .page-breadcrumb { font-size:12px; color: var(--gray-400); }
+  .topbar-right { display:flex; align-items:center; gap:12px; }
+  .topbar-btn {
+    padding: 7px 14px;
+    border: 1px solid var(--card-border);
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .topbar-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .topbar-btn.primary {
+    background: linear-gradient(135deg, #2E6B4F, #1B3A2A);
+    color: white;
+    border: none;
+  }
+  .topbar-btn.primary:hover { opacity:0.9; transform:translateY(-1px); box-shadow: var(--shadow-md); }
+  .mode-toggle {
+    display: flex;
+    background: var(--gray-100);
+    border-radius: var(--radius-sm);
+    padding: 3px;
+    gap: 2px;
+  }
+  .mode-btn {
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    background: transparent;
+    color: var(--gray-500);
+  }
+  .mode-btn.active { background: var(--white); color: var(--gold); box-shadow: var(--shadow-sm); }
+  .notif-btn {
+    width: 36px; height: 36px;
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    background: var(--gray-100);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    transition: var(--transition);
+  }
+  .notif-btn:hover { background: var(--beige); }
+  .notif-dot {
+    position: absolute; top: 4px; right: 4px;
+    width: 8px; height: 8px;
+    background: var(--danger);
+    border-radius: 50%;
+    border: 2px solid var(--white);
+  }
+  /* PAGE CONTENT */
+  .page-content { padding: 24px; flex:1; }
+  .page { display:none; }
+  .page.active { display:block; }
+  /* CARDS */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+  .card:hover { box-shadow: var(--shadow-md); }
+  .card-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+  .card-title { font-size:13px; font-weight:700; color: var(--gray-600); text-transform:uppercase; letter-spacing:0.5px; }
+  .card-action { font-size:11px; color: var(--gold); cursor:pointer; font-weight:600; }
+  .card-action:hover { text-decoration:underline; }
+  /* KPI GRID */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom:20px; }
+  .kpi-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  }
+  .kpi-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .kpi-icon { font-size: 24px; margin-bottom: 8px; }
+  .kpi-label { font-size:11px; color: var(--gray-400); text-transform:uppercase; letter-spacing:0.5px; font-weight:600; margin-bottom:4px; }
+  .kpi-value { font-size:22px; font-weight:800; color: var(--gray-700); letter-spacing:-0.5px; margin-bottom:6px; }
+  .kpi-change { font-size:11px; font-weight:600; display:flex; align-items:center; gap:4px; }
+  .kpi-change.up { color: var(--success); }
+  .kpi-change.down { color: var(--danger); }
+  .kpi-change.neutral { color: var(--gray-400); }
+  /* GRID LAYOUTS */
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  /* CHART WRAPPER */
+  .chart-wrap { position:relative; height:280px; }
+  .chart-wrap.tall { height:320px; }
+  /* TABLE */
+  .table-wrap { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; }
+  thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    color: var(--gray-400);
+    border-bottom: 1px solid var(--card-border);
+    background: var(--gray-100);
+  }
+  tbody td {
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--gray-600);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  tbody tr:hover { background: var(--gray-100); }
+  tbody tr:last-child td { border-bottom: none; }
+  /* BADGES */
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge-success { background: var(--success-bg); color: var(--success); }
+  .badge-danger { background: var(--danger-bg); color: var(--danger); }
+  .badge-warning { background: var(--warning-bg); color: var(--warning); }
+  .badge-info { background: var(--info-bg); color: var(--info); }
+  .badge-gold { background: var(--gold-pale); color: var(--brown-mid); }
+  .badge-gray { background: var(--gray-200); color: var(--gray-600); }
+  /* PROGRESS */
+  .progress-bar { background: var(--gray-200); border-radius:20px; height:8px; overflow:hidden; }
+  .progress-fill { height:100%; border-radius:20px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); transition: width 0.6s ease; }
+  /* ALERT */
+  .alert {
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+  .alert-icon { font-size:16px; flex-shrink:0; }
+  .alert-info { background: var(--info-bg); color: var(--info); border-left: 3px solid var(--info); }
+  .alert-success { background: var(--success-bg); color: var(--success); border-left: 3px solid var(--success); }
+  .alert-warning { background: var(--warning-bg); color: var(--warning); border-left: 3px solid var(--warning); }
+  .alert-danger { background: var(--danger-bg); color: var(--danger); border-left: 3px solid var(--danger); }
+  /* SEPARATOR */
+  .sep { border:none; border-top:1px solid var(--card-border); margin: 16px 0; }
+  /* INPUT / FORM */
+  .form-group { margin-bottom: 16px; }
+  .form-label { display:block; font-size:12px; font-weight:600; color: var(--gray-600); margin-bottom:6px; }
+  .form-control {
+    width:100%;
+    padding: 9px 12px;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: var(--gray-700);
+    background: var(--white);
+    transition: var(--transition);
+    outline: none;
+  }
+  .form-control:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,64,0.1); }
+  select.form-control { cursor:pointer; }
+  /* BUTTON */
+  .btn {
+    padding: 9px 18px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    display: inline-flex; align-items:center; gap:6px;
+  }
+  .btn-primary { background: linear-gradient(135deg, #2E6B4F, #1B3A2A); color:white; }
+  .btn-primary:hover { opacity:0.9; transform:translateY(-1px); box-shadow: 0 4px 12px rgba(46,107,79,0.3); }
+  .btn-outline { background: transparent; border: 1px solid var(--card-border); color: var(--gray-600); }
+  .btn-outline:hover { border-color:var(--gold); color:var(--gold); }
+  .btn-danger { background: var(--danger); color:white; }
+  .btn-success { background: var(--success); color:white; }
+  /* SECTIONS */
+  .section-title {
+    font-size:18px; font-weight:800; color: var(--gray-700);
+    margin-bottom: 4px; display:flex; align-items:center; gap:8px;
+  }
+  .section-sub { font-size:13px; color: var(--gray-400); margin-bottom: 20px; }
+  /* LOGIN PAGE */
+  .login-page {
+    min-height: 100vh;
+    display: flex;
+    background: linear-gradient(135deg, var(--sidebar-bg) 0%, #2A1F0A 50%, var(--sidebar-bg) 100%);
+  }
+  .login-left {
+    flex:1;
+    display: flex; flex-direction:column; align-items:center; justify-content:center;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .login-left::before {
+    content:'';
+    position:absolute; top:0; left:0; right:0; bottom:0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23B8941F' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .login-brand { text-align:center; z-index:1; margin-bottom:48px; }
+  .login-logo { font-size:64px; margin-bottom:16px; }
+  .login-title { font-size:48px; font-weight:900; color: var(--gold-light); letter-spacing:-2px; }
+  .login-sub { font-size:16px; color: rgba(200,184,150,0.7); margin-top:8px; }
+  .login-features { z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:16px; max-width:500px; }
+  .login-feat {
+    background: rgba(201,168,64,0.08);
+    border: 1px solid rgba(201,168,64,0.15);
+    border-radius: var(--radius);
+    padding: 16px;
+    text-align:center;
+  }
+  .login-feat-icon { font-size:24px; margin-bottom:8px; }
+  .login-feat-text { font-size:12px; color: rgba(200,184,150,0.8); font-weight:500; }
+  .login-right {
+    width: 440px;
+    background: var(--white);
+    display: flex; align-items:center; justify-content:center;
+    padding: 48px 40px;
+    box-shadow: -20px 0 60px rgba(0,0,0,0.3);
+  }
+  .login-form { width:100%; }
+  .login-form-title { font-size:28px; font-weight:800; color: var(--gray-700); margin-bottom:6px; }
+  .login-form-sub { font-size:13px; color: var(--gray-400); margin-bottom:32px; }
+  .login-divider { text-align:center; position:relative; margin: 20px 0; }
+  .login-divider::before { content:''; position:absolute; top:50%; left:0; right:0; height:1px; background:var(--card-border); }
+  .login-divider span { background:white; padding: 0 12px; font-size:11px; color: var(--gray-400); position:relative; }
+  /* TIMELINE */
+  .timeline { list-style:none; position:relative; padding-left:24px; }
+  .timeline::before { content:''; position:absolute; left:8px; top:0; bottom:0; width:2px; background: var(--gray-200); }
+  .timeline-item { position:relative; padding-bottom:20px; }
+  .timeline-item::before {
+    content:''; position:absolute; left:-20px; top:4px;
+    width:10px; height:10px;
+    background: var(--gold-light); border-radius:50%;
+    box-shadow: 0 0 0 3px rgba(201,168,64,0.15);
+  }
+  .timeline-date { font-size:11px; color: var(--gray-400); margin-bottom:4px; }
+  .timeline-text { font-size:13px; color: var(--gray-600); }
+  /* META CARD */
+  .meta-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .meta-name { font-size:13px; font-weight:600; color: var(--gray-700); }
+  .meta-pct { font-size:13px; font-weight:700; color: var(--gold); }
+  .meta-sub { font-size:11px; color: var(--gray-400); margin-top:4px; }
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset:0;
+    background: rgba(0,0,0,0.5);
+    display: flex; align-items:center; justify-content:center;
+    z-index: 1000;
+    opacity:0; pointer-events:none; transition: opacity 0.2s;
+  }
+  .modal-overlay.open { opacity:1; pointer-events:all; }
+  .modal {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    width: 500px;
+    max-width: 90vw;
+    box-shadow: var(--shadow-lg);
+    transform: translateY(20px);
+    transition: transform 0.2s;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-title { font-size:18px; font-weight:800; color: var(--gray-700); margin-bottom:8px; }
+  .modal-sub { font-size:13px; color: var(--gray-400); margin-bottom:24px; }
+  .modal-footer { display:flex; gap:10px; justify-content:flex-end; margin-top:24px; }
+  /* TOAST */
+  .toast-container { position:fixed; bottom:24px; right:24px; z-index:9999; display:flex; flex-direction:column; gap:10px; }
+  .toast {
+    background: var(--gray-800);
+    color: white;
+    padding: 12px 18px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight:500;
+    box-shadow: var(--shadow-lg);
+    display: flex; align-items:center; gap:10px;
+    animation: slideIn 0.3s ease;
+    border-left: 3px solid var(--gold-light);
+  }
+  @keyframes slideIn { from { transform:translateX(100px); opacity:0; } to { transform:translateX(0); opacity:1; } }
+  /* AI CHAT */
+  .ai-chat { display:flex; flex-direction:column; height:340px; }
+  .ai-messages { flex:1; overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:12px; }
+  .ai-msg { display:flex; gap:10px; align-items:flex-start; }
+  .ai-msg.user { flex-direction:row-reverse; }
+  .ai-avatar { width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+  .ai-avatar.bot { background: linear-gradient(135deg, #2E6B4F, #1B3A2A); }
+  .ai-avatar.user { background: var(--info); }
+  .ai-bubble {
+    max-width:80%; padding:10px 14px; border-radius:12px;
+    font-size:13px; line-height:1.5;
+  }
+  .ai-bubble.bot { background: var(--gray-100); color: var(--gray-700); border-radius:12px 12px 12px 0; }
+  .ai-bubble.user { background: linear-gradient(135deg, #2E6B4F, #1B3A2A); color:white; border-radius:12px 12px 0 12px; }
+  .ai-input-row { display:flex; gap:8px; padding:12px; border-top:1px solid var(--card-border); }
+  .ai-input { flex:1; padding:8px 12px; border:1px solid var(--card-border); border-radius:20px; font-size:13px; outline:none; }
+  .ai-input:focus { border-color:var(--gold); }
+  .ai-send { width:36px; height:36px; background:linear-gradient(135deg, #2E6B4F, #1B3A2A); border:none; border-radius:50%; cursor:pointer; font-size:14px; color:white; }
+  /* CONCILIACAO */
+  .bank-row {
+    display:flex; align-items:center; gap:12px;
+    padding:12px 14px; border-radius:var(--radius-sm);
+    border:1px solid var(--card-border);
+    margin-bottom:8px; background:var(--card-bg);
+    transition:var(--transition);
+  }
+  .bank-row:hover { border-color:var(--gold-light); background:var(--gold-pale); }
+  .bank-icon { font-size:20px; width:32px; text-align:center; }
+  .bank-info { flex:1; }
+  .bank-desc { font-size:13px; font-weight:600; color:var(--gray-700); }
+  .bank-detail { font-size:11px; color:var(--gray-400); }
+  .bank-amount { font-size:14px; font-weight:700; }
+  .bank-amount.credit { color:var(--success); }
+  .bank-amount.debit { color:var(--danger); }
+  .bank-status { }
+  /* UPLOAD AREA */
+  .upload-area {
+    border: 2px dashed var(--card-border);
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .upload-area:hover { border-color: var(--gold); background: var(--gold-pale); }
+  .upload-icon { font-size:40px; margin-bottom:12px; }
+  .upload-text { font-size:14px; color:var(--gray-500); }
+  .upload-types { font-size:11px; color:var(--gray-400); margin-top:6px; }
+  /* DARK TOGGLE */
+  .dark-toggle {
+    width:36px; height:20px; background:var(--gray-300); border-radius:10px;
+    cursor:pointer; position:relative; transition:var(--transition);
+  }
+  .dark-toggle.on { background:var(--gold); }
+  .dark-toggle::after {
+    content:''; position:absolute; width:16px; height:16px;
+    background:white; border-radius:50%; top:2px; left:2px; transition:var(--transition);
+  }
+  .dark-toggle.on::after { left:18px; }
+  /* STAT LINE */
+  .stat-line { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--gray-200); }
+  .stat-line:last-child { border-bottom:none; }
+  .stat-name { font-size:13px; color:var(--gray-600); }
+  .stat-val { font-size:13px; font-weight:700; color:var(--gray-700); }
+  /* CALENDAR */
+  .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+  .cal-day { aspect-ratio:1; display:flex; align-items:center; justify-content:center; font-size:12px; border-radius:6px; cursor:pointer; transition:var(--transition); }
+  .cal-day:hover { background:var(--beige); }
+  .cal-day.today { background:var(--gold); color:white; font-weight:700; }
+  .cal-day.has-event { position:relative; }
+  .cal-day.has-event::after { content:''; position:absolute; bottom:2px; width:4px; height:4px; background:var(--danger); border-radius:50%; }
+  .cal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+  /* CARD VISUAL */
+  .credit-card {
+    background: linear-gradient(135deg, var(--gray-800), var(--gray-700));
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    color:white;
+    position:relative; overflow:hidden; margin-bottom:16px;
+  }
+  .credit-card::before {
+    content:''; position:absolute; top:-40px; right:-40px;
+    width:160px; height:160px;
+    border:30px solid rgba(255,255,255,0.05);
+    border-radius:50%;
+  }
+  .credit-card::after {
+    content:''; position:absolute; bottom:-40px; left:40px;
+    width:120px; height:120px;
+    border:20px solid rgba(255,255,255,0.04);
+    border-radius:50%;
+  }
+  .card-chip { font-size:24px; margin-bottom:16px; }
+  .card-number { font-size:16px; letter-spacing:4px; margin-bottom:20px; opacity:0.9; font-family:monospace; }
+  .card-info { display:flex; justify-content:space-between; align-items:flex-end; }
+  .card-holder { font-size:12px; opacity:0.6; text-transform:uppercase; letter-spacing:1px; margin-bottom:2px; }
+  .card-name { font-size:15px; font-weight:700; letter-spacing:1px; }
+  .card-exp-label { font-size:10px; opacity:0.6; text-transform:uppercase; }
+  .card-exp { font-size:14px; font-weight:600; }
+  .card-limit { position:absolute; top:24px; right:24px; text-align:right; }
+  .card-limit-label { font-size:10px; opacity:0.6; }
+  .card-limit-val { font-size:16px; font-weight:700; color:var(--gold-light); }
+  /* MENTORIA */
+  .task-item {
+    display:flex; align-items:center; gap:12px;
+    padding: 12px 0; border-bottom: 1px solid var(--gray-200);
+  }
+  .task-item:last-child { border-bottom:none; }
+  .task-check { width:18px; height:18px; border-radius:4px; border:2px solid var(--card-border); cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:var(--transition); }
+  .task-check.done { background:var(--success); border-color:var(--success); color:white; }
+  .task-text { flex:1; font-size:13px; color:var(--gray-600); }
+  .task-text.done { text-decoration:line-through; color:var(--gray-400); }
+  .task-due { font-size:11px; color:var(--gray-400); }
+  /* DROPZONE ACTIVE */
+  .concil-ai-tag { font-size:10px; padding:2px 6px; background:linear-gradient(135deg, #2E6B4F, #1B3A2A); color:white; border-radius:4px; font-weight:700; }
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width:6px; height:6px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:var(--gray-300); border-radius:3px; }
+  ::-webkit-scrollbar-thumb:hover { background:var(--gray-400); }
+  /* RESPONSIVE */
+  @media (max-width:1200px) { .kpi-grid { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:768px) {
+    .sidebar { transform:translateX(-260px); }
+    .sidebar.open { transform:translateX(0); }
+    .main-content { margin-left:0; }
+    .kpi-grid, .grid-2, .grid-3, .grid-4 { grid-template-columns:1fr; }
+    .login-left { display:none; }
+    .login-right { width:100%; }
+  }
+  /* ANIMATIONS */
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  .page.active { animation: fadeIn 0.3s ease; }
+  /* IA TYPING */
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .typing-dot { display:inline-block; width:6px; height:6px; background:var(--gray-400); border-radius:50%; margin:0 2px; animation:blink 1s infinite; }
+  .typing-dot:nth-child(2) { animation-delay:0.2s; }
+  .typing-dot:nth-child(3) { animation-delay:0.4s; }
+  /* DRE */
+  .dre-row { display:flex; justify-content:space-between; padding:8px 12px; border-radius:6px; }
+  .dre-row:nth-child(even) { background:var(--gray-100); }
+  .dre-row.total { background:var(--gold-pale); font-weight:700; border-radius:8px; margin-top:4px; }
+  .dre-label { font-size:13px; color:var(--gray-600); }
+  .dre-value { font-size:13px; font-weight:600; color:var(--gray-700); }
+  .dre-section { font-size:11px; font-weight:700; color:var(--gray-400); text-transform:uppercase; letter-spacing:0.5px; padding: 12px 12px 4px; }
+</style>
+</head>
+<body>
+
+<!-- ====== LOGIN PAGE ====== -->
+<div id="loginPage" class="login-page">
+  <div class="login-left">
+    <div class="login-brand">
+      <div class="login-logo">💎</div>
+      <div class="login-title">CG Finanças</div>
+      <div class="login-sub">Hub Estratégico · Assessoria & Mentoria</div>
+    </div>
+    <div class="login-features">
+      <div class="login-feat">
+        <div class="login-feat-icon">🤖</div>
+        <div class="login-feat-text">IA Financeira com insights automáticos</div>
+      </div>
+      <div class="login-feat">
+        <div class="login-feat-icon">🏦</div>
+        <div class="login-feat-text">Conciliação bancária inteligente</div>
+      </div>
+      <div class="login-feat">
+        <div class="login-feat-icon">📊</div>
+        <div class="login-feat-text">Relatórios executivos PDF e Excel</div>
+      </div>
+      <div class="login-feat">
+        <div class="login-feat-icon">🎯</div>
+        <div class="login-feat-text">Mentoria e assessoria financeira</div>
+      </div>
+      <div class="login-feat">
+        <div class="login-feat-icon">🏢</div>
+        <div class="login-feat-text">Multiempresa SaaS escalável</div>
+      </div>
+      <div class="login-feat">
+        <div class="login-feat-icon">📱</div>
+        <div class="login-feat-text">Integração WhatsApp (em breve)</div>
+      </div>
+    </div>
+  </div>
+  <div class="login-right">
+    <div class="login-form">
+      <div style="text-align:center;margin-bottom:24px;">
+        <span style="font-size:36px;">💎</span>
+        <div style="font-size:24px;font-weight:800;color:#1B3A2A;font-family:Playfair Display,serif;">CG Finanças</div>
+      </div>
+      <div class="login-form-title">Bem-vindo de volta</div>
+      <div class="login-form-sub">Acesse o Hub Estratégico CG Finanças</div>
+      <div class="form-group">
+        <label class="form-label">E-mail</label>
+        <input type="email" class="form-control" placeholder="seu@email.com" value="admin@finpro.com.br" id="loginEmail">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Senha</label>
+        <input type="password" class="form-control" placeholder="••••••••" value="123456" id="loginPass">
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray-500);cursor:pointer;">
+          <input type="checkbox" checked> Lembrar acesso
+        </label>
+        <a href="#" style="font-size:12px;color:var(--gold);text-decoration:none;font-weight:600;">Esqueci a senha</a>
+      </div>
+      <button class="btn btn-primary" style="width:100%;padding:12px;font-size:14px;justify-content:center;" onclick="doLogin()">
+        🔐 Acessar Hub Estratégico
+      </button>
+      <div class="login-divider"><span>ou acesse como</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <button class="btn btn-outline" style="justify-content:center;font-size:12px;" onclick="loginAs('pf')">👤 Cliente PF</button>
+        <button class="btn btn-outline" style="justify-content:center;font-size:12px;" onclick="loginAs('pj')">🏢 Cliente PJ</button>
+      </div>
+      <div style="text-align:center;margin-top:20px;font-size:11px;color:var(--gray-400);">
+        🔒 Conexão segura · SSL/TLS · LGPD Compliance
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== APP ====== -->
+<div id="appLayout" class="app-layout" style="display:none;">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <a class="logo-mark" href="#">
+        <div class="logo-icon">💎</div>
+        <div class="logo-text">
+          <div class="logo-name">CG Finanças</div>
+          <div class="logo-tagline">Financial ERP</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="client-switcher" onclick="openModal('clientModal')">
+      <div class="client-label">Cliente Ativo</div>
+      <div class="client-name">
+        <span id="activeName">Empresa XYZ Ltda</span>
+        <span class="client-type" id="activeType">PJ</span>
+      </div>
+    </div>
+
+    <div class="sidebar-nav">
+      <div class="nav-section">Principal</div>
+      <div class="nav-item active" onclick="showPage('dashboard')">
+        <span class="nav-icon">📊</span> Dashboard
+      </div>
+      <div class="nav-item" onclick="showPage('cashflow')">
+        <span class="nav-icon">💸</span> Fluxo de Caixa
+      </div>
+      <div class="nav-item" onclick="showPage('dre')">
+        <span class="nav-icon">📈</span> DRE / Resultados
+      </div>
+
+      <div class="nav-section">Financeiro</div>
+      <div class="nav-item" onclick="showPage('payables')">
+        <span class="nav-icon">🔴</span> Contas a Pagar
+        <span class="nav-badge">8</span>
+      </div>
+      <div class="nav-item" onclick="showPage('receivables')">
+        <span class="nav-icon">🟢</span> Contas a Receber
+        <span class="nav-badge">12</span>
+      </div>
+      <div class="nav-item" onclick="showPage('cards')">
+        <span class="nav-icon">💳</span> Cartões
+      </div>
+      <div class="nav-item" onclick="showPage('conciliation')">
+        <span class="nav-icon">🏦</span> Conciliação Bancária
+      </div>
+
+      <div class="nav-section">Gestão</div>
+      <div class="nav-item" onclick="showPage('mentoring')">
+        <span class="nav-icon">🎯</span> Mentoria & Metas
+      </div>
+      <div class="nav-item" onclick="showPage('reports')">
+        <span class="nav-icon">📋</span> Relatórios
+      </div>
+      <div class="nav-item" onclick="showPage('ai')">
+        <span class="nav-icon">🤖</span> IA Financeira
+      </div>
+
+      <div class="nav-section" id="adminSection">Admin</div>
+      <div class="nav-item" id="adminClients" onclick="showPage('clients')">
+        <span class="nav-icon">👥</span> Clientes
+      </div>
+      <div class="nav-item" onclick="showPage('settings')">
+        <span class="nav-icon">⚙️</span> Configurações
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar" id="userAvatar">A</div>
+        <div class="user-info">
+          <div class="user-name" id="userName">Admin Master</div>
+          <div class="user-role" id="userRole">Administrador</div>
+        </div>
+        <span style="color:var(--sidebar-text);opacity:0.4;cursor:pointer;" onclick="doLogout()">🚪</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <div class="main-content">
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <span style="font-size:20px;cursor:pointer;" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</span>
+        <div>
+          <div class="page-title" id="pageTitle">Dashboard</div>
+          <div class="page-breadcrumb" id="pageBreadcrumb">CG Finanças · Empresa XYZ Ltda</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="mode-toggle">
+          <button class="mode-btn active" id="btnPJ" onclick="setMode('PJ')">🏢 PJ</button>
+          <button class="mode-btn" id="btnPF" onclick="setMode('PF')">👤 PF</button>
+        </div>
+        <button class="topbar-btn" onclick="showPage('reports')">📋 Relatório</button>
+        <button class="topbar-btn primary" onclick="openModal('lancamentoModal')">+ Lançamento</button>
+        <button class="notif-btn" onclick="showToast('🔔 Você tem 3 alertas financeiros importantes!')">
+          🔔<span class="notif-dot"></span>
+        </button>
+        <div class="dark-toggle" id="darkToggle" onclick="toggleDark()"></div>
+      </div>
+    </div>
+
+    <!-- PAGES -->
+    <div class="page-content">
+
+      <!-- ===== DASHBOARD ===== -->
+      <div class="page active" id="page-dashboard">
+        <div class="section-title">📊 Dashboard Financeiro</div>
+        <div class="section-sub">Visão geral em tempo real · Maio 2026</div>
+
+        <!-- ALERTS -->
+        <div style="margin-bottom:16px;">
+          <div class="alert alert-warning">
+            <span class="alert-icon">⚠️</span>
+            <div><strong>Fatura do cartão vence em 6 dias!</strong> Valor: R$ 18.240 — Cartão Nubank PJ. <a href="#" style="color:var(--warning);font-weight:700;" onclick="showPage('cards');return false;">Ver cartão →</a></div>
+          </div>
+          <div class="alert alert-danger">
+            <span class="alert-icon">🔴</span>
+            <div><strong>8 contas a pagar com vencimento esta semana.</strong> Total: R$ 32.100. <a href="#" style="color:var(--danger);font-weight:700;" onclick="showPage('payables');return false;">Ver agora →</a></div>
+          </div>
+        </div>
+
+        <!-- KPIs -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon">💰</div>
+            <div class="kpi-label">Saldo Atual</div>
+            <div class="kpi-value">R$ 284.750</div>
+            <div class="kpi-change up">▲ +12,4% vs. abril</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">📈</div>
+            <div class="kpi-label">Faturamento Maio</div>
+            <div class="kpi-value">R$ 158.320</div>
+            <div class="kpi-change up">▲ +8,1% vs. abril</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">📉</div>
+            <div class="kpi-label">Despesas Maio</div>
+            <div class="kpi-value">R$ 89.640</div>
+            <div class="kpi-change down">▼ -3,2% vs. abril</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">✅</div>
+            <div class="kpi-label">Lucro Líquido</div>
+            <div class="kpi-value">R$ 68.680</div>
+            <div class="kpi-change up">Margem: 43,4%</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">🔴</div>
+            <div class="kpi-label">A Pagar</div>
+            <div class="kpi-value">R$ 32.100</div>
+            <div class="kpi-change down">8 vencimentos próx.</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">🟢</div>
+            <div class="kpi-label">A Receber</div>
+            <div class="kpi-value">R$ 74.500</div>
+            <div class="kpi-change neutral">12 títulos em aberto</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">🎯</div>
+            <div class="kpi-label">Meta Mensal</div>
+            <div class="kpi-value">88%</div>
+            <div class="kpi-change up">R$ 158k / R$ 180k</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">💳</div>
+            <div class="kpi-label">Fatura Cartão</div>
+            <div class="kpi-value">R$ 18.240</div>
+            <div class="kpi-change down">Vence em 6 dias</div>
+          </div>
+        </div>
+
+        <!-- CHARTS -->
+        <div class="grid-2" style="margin-bottom:20px;">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">📊 Fluxo de Caixa — 6 Meses</div>
+              <span class="card-action">Ver completo</span>
+            </div>
+            <div class="chart-wrap"><canvas id="cashflowChart"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">🥧 Despesas por Categoria</div>
+              <span class="card-action">Detalhar</span>
+            </div>
+            <div class="chart-wrap"><canvas id="expensesChart"></canvas></div>
+          </div>
+        </div>
+
+        <!-- BOTTOM ROW -->
+        <div class="grid-2" style="margin-bottom:20px;">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">📋 Últimos Lançamentos</div>
+              <span class="card-action" onclick="showPage('conciliation')">Ver todos</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Valor</th><th>Tipo</th></tr></thead>
+                <tbody>
+                  <tr><td>22/05</td><td>PIX Recebido - Cliente A</td><td><span class="badge badge-info">Receita</span></td><td style="color:var(--success);font-weight:600;">+R$ 8.500</td><td>PIX</td></tr>
+                  <tr><td>21/05</td><td>Aluguel Escritório</td><td><span class="badge badge-warning">Despesa</span></td><td style="color:var(--danger);font-weight:600;">-R$ 3.200</td><td>Débito</td></tr>
+                  <tr><td>21/05</td><td>Fornecedor Tech Ltda</td><td><span class="badge badge-warning">Fornecedor</span></td><td style="color:var(--danger);font-weight:600;">-R$ 1.800</td><td>TED</td></tr>
+                  <tr><td>20/05</td><td>Consultoria - Empresa B</td><td><span class="badge badge-info">Receita</span></td><td style="color:var(--success);font-weight:600;">+R$ 12.000</td><td>TED</td></tr>
+                  <tr><td>19/05</td><td>Folha de Pagamento</td><td><span class="badge badge-danger">RH</span></td><td style="color:var(--danger);font-weight:600;">-R$ 15.400</td><td>Débito</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">🎯 Metas Financeiras</div>
+              <span class="card-action" onclick="showPage('mentoring')">Gerenciar</span>
+            </div>
+            <div style="padding:4px 0;">
+              <div style="margin-bottom:16px;">
+                <div class="meta-header"><span class="meta-name">💰 Faturamento Mensal</span><span class="meta-pct">88%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div>
+                <div class="meta-sub">R$ 158.320 de R$ 180.000 · Maio 2026</div>
+              </div>
+              <div style="margin-bottom:16px;">
+                <div class="meta-header"><span class="meta-name">🏦 Reserva de Emergência</span><span class="meta-pct">62%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:62%"></div></div>
+                <div class="meta-sub">R$ 62.000 de R$ 100.000</div>
+              </div>
+              <div style="margin-bottom:16px;">
+                <div class="meta-header"><span class="meta-name">📉 Redução de Custos Fixos</span><span class="meta-pct">45%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>
+                <div class="meta-sub">Reduzir R$ 8.000/mês em custos operacionais</div>
+              </div>
+              <div>
+                <div class="meta-header"><span class="meta-name">💎 Patrimônio Líquido</span><span class="meta-pct">71%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:71%"></div></div>
+                <div class="meta-sub">R$ 710.000 de R$ 1.000.000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CALENDAR + AI INSIGHTS -->
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">📅 Calendário Financeiro</div>
+              <span class="card-action">Junho 2026</span>
+            </div>
+            <div class="cal-header">
+              <button class="btn btn-outline" style="padding:4px 10px;font-size:11px;">◀</button>
+              <span style="font-size:14px;font-weight:700;color:var(--gray-700);">Maio 2026</span>
+              <button class="btn btn-outline" style="padding:4px 10px;font-size:11px;">▶</button>
+            </div>
+            <div class="cal-grid" style="margin-bottom:8px;">
+              <div style="text-align:center;font-size:11px;font-weight:700;color:var(--gray-400);padding:4px;">Dom</div>
+              <div style="text-align:center;font-size:11px;font-weight:700;color:var(--gray-400);padding:4px;">Seg</div>
+              <div style="text-align:center;font-size:11px;font-weight:700;color:var(--gray-400);padding:4px;">Ter</div>
+              <div style="text-align:center;font-size:11px;font-weight:700;color:var(--gray-400);padding:4px;">Qua</div>
+              <div style="text-align:center;font-size:11px;font-weight:700;color:var(--gray-400);padding:4px;">Qui</div>
+              <div style="text-align:center;font-size:11px;font-weight:700;color:var(--gray-400);padding:4px;">Sex</div>
+              <div style="text-align:center;font-size:11px;font-weight:700;color:var(--gray-400);padding:4px;">Sáb</div>
+            </div>
+            <div class="cal-grid" id="calendarGrid"></div>
+            <hr class="sep">
+            <div style="font-size:12px;color:var(--gray-500);">
+              <div style="display:flex;gap:16px;flex-wrap:wrap;">
+                <span>🔴 Vencimento: 25/05 — DAS R$ 4.200</span>
+                <span>🟡 Pagamento: 28/05 — Aluguel R$ 3.200</span>
+                <span>🟢 Receb: 30/05 — NF #1042 R$ 18.000</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">🤖 IA Financeira — Insights</div>
+              <span class="card-action" onclick="showPage('ai')">Chat completo</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div class="alert alert-success">
+                <span class="alert-icon">📈</span>
+                <div><strong>Crescimento acelerado:</strong> Faturamento +61,6% nos últimos 6 meses. Acima da média do setor.</div>
+              </div>
+              <div class="alert alert-warning">
+                <span class="alert-icon">⚠️</span>
+                <div><strong>Concentração de receita:</strong> 48% do faturamento vem de 2 clientes. Diversifique a carteira.</div>
+              </div>
+              <div class="alert alert-info">
+                <span class="alert-icon">💡</span>
+                <div><strong>Oportunidade:</strong> SaaS aumentou 28% nos gastos. Consolidar planos pode economizar R$ 800/mês.</div>
+              </div>
+              <div class="alert alert-danger">
+                <span class="alert-icon">🔔</span>
+                <div><strong>DAS/Simples vence 20/06:</strong> Valor estimado R$ 9.499. Provisione agora!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end dashboard -->
+
+      <!-- ===== FLUXO DE CAIXA ===== -->
+      <div class="page" id="page-cashflow">
+        <div class="section-title">💸 Fluxo de Caixa</div>
+        <div class="section-sub">Entradas e saídas detalhadas · Maio 2026</div>
+        <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px;">
+          <div class="kpi-card">
+            <div class="kpi-icon">🟢</div>
+            <div class="kpi-label">Total Entradas</div>
+            <div class="kpi-value">R$ 158.320</div>
+            <div class="kpi-change up">▲ +8,1%</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">🔴</div>
+            <div class="kpi-label">Total Saídas</div>
+            <div class="kpi-value">R$ 89.640</div>
+            <div class="kpi-change down">▼ -3,2%</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon">💰</div>
+            <div class="kpi-label">Saldo do Período</div>
+            <div class="kpi-value">R$ 68.680</div>
+            <div class="kpi-change up">Margem 43,4%</div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header">
+            <div class="card-title">📊 Evolução do Fluxo de Caixa</div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn btn-outline" style="padding:5px 10px;font-size:11px;">3M</button>
+              <button class="btn btn-outline" style="padding:5px 10px;font-size:11px;border-color:var(--gold);color:var(--gold);">6M</button>
+              <button class="btn btn-outline" style="padding:5px 10px;font-size:11px;">12M</button>
+            </div>
+          </div>
+          <div class="chart-wrap tall"><canvas id="cashflowDetailChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📋 Lançamentos do Período</div>
+            <div style="display:flex;gap:8px;">
+              <input type="text" class="form-control" placeholder="🔍 Buscar..." style="width:200px;padding:6px 10px;">
+              <select class="form-control" style="width:140px;padding:6px 10px;">
+                <option>Todos</option>
+                <option>Entradas</option>
+                <option>Saídas</option>
+              </select>
+              <button class="btn btn-primary" onclick="showToast('📋 Relatório gerado com sucesso!')">📥 Exportar</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Tipo Pgto</th><th>Entrada</th><th>Saída</th><th>Saldo</th></tr></thead>
+              <tbody>
+                <tr><td>22/05</td><td>Consultoria Financeira — Cliente A</td><td><span class="badge badge-info">Consultoria</span></td><td>PIX</td><td style="color:var(--success);font-weight:600;">+R$ 12.000</td><td>-</td><td>R$ 284.750</td></tr>
+                <tr><td>22/05</td><td>Serviço de Mentoria — Cliente D</td><td><span class="badge badge-info">Mentoria</span></td><td>TED</td><td style="color:var(--success);font-weight:600;">+R$ 4.500</td><td>-</td><td>R$ 272.750</td></tr>
+                <tr><td>21/05</td><td>Aluguel Sede — Lajes Imóveis</td><td><span class="badge badge-warning">Imóvel</span></td><td>Débito</td><td>-</td><td style="color:var(--danger);font-weight:600;">-R$ 3.200</td><td>R$ 268.250</td></tr>
+                <tr><td>21/05</td><td>Assinatura Adobe Creative</td><td><span class="badge badge-gray">Software</span></td><td>Cartão</td><td>-</td><td style="color:var(--danger);font-weight:600;">-R$ 320</td><td>R$ 271.450</td></tr>
+                <tr><td>20/05</td><td>Assessoria Contábil — Empresa B</td><td><span class="badge badge-info">Assessoria</span></td><td>TED</td><td style="color:var(--success);font-weight:600;">+R$ 18.000</td><td>-</td><td>R$ 271.770</td></tr>
+                <tr><td>19/05</td><td>Folha de Pagamento — 3 Funcionários</td><td><span class="badge badge-danger">RH</span></td><td>DOC</td><td>-</td><td style="color:var(--danger);font-weight:600;">-R$ 15.400</td><td>R$ 253.770</td></tr>
+                <tr><td>18/05</td><td>Internet Empresarial — Vivo Fib</td><td><span class="badge badge-gray">TI</span></td><td>Débito</td><td>-</td><td style="color:var(--danger);font-weight:600;">-R$ 350</td><td>R$ 269.170</td></tr>
+                <tr><td>17/05</td><td>Treinamento Financeiro — Turma 3</td><td><span class="badge badge-info">Treinamento</span></td><td>PIX</td><td style="color:var(--success);font-weight:600;">+R$ 8.200</td><td>-</td><td>R$ 269.520</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!-- end cashflow -->
+
+      <!-- ===== DRE ===== -->
+      <div class="page" id="page-dre">
+        <div class="section-title">📈 DRE — Demonstrativo de Resultados</div>
+        <div class="section-sub">Demonstração de Resultado do Exercício · Maio 2026</div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">🏦 DRE Simplificada — Maio 2026</div>
+              <button class="btn btn-primary" style="padding:6px 12px;font-size:11px;" onclick="showToast('📊 DRE exportada em PDF!')">📥 PDF</button>
+            </div>
+            <div class="dre-section">RECEITA BRUTA</div>
+            <div class="dre-row"><span class="dre-label">Consultoria Financeira</span><span class="dre-value" style="color:var(--success)">R$ 52.000</span></div>
+            <div class="dre-row"><span class="dre-label">Mentoria PF</span><span class="dre-value" style="color:var(--success)">R$ 31.500</span></div>
+            <div class="dre-row"><span class="dre-label">Assessoria PJ</span><span class="dre-value" style="color:var(--success)">R$ 28.900</span></div>
+            <div class="dre-row"><span class="dre-label">Treinamentos</span><span class="dre-value" style="color:var(--success)">R$ 19.200</span></div>
+            <div class="dre-row"><span class="dre-label">Relatórios & Outros</span><span class="dre-value" style="color:var(--success)">R$ 26.720</span></div>
+            <div class="dre-row total"><span class="dre-label">= RECEITA BRUTA TOTAL</span><span class="dre-value">R$ 158.320</span></div>
+            <div class="dre-section" style="margin-top:8px;">DEDUÇÕES E IMPOSTOS</div>
+            <div class="dre-row"><span class="dre-label">(-) ISS / DAS / Simples</span><span class="dre-value" style="color:var(--danger)">-R$ 9.499</span></div>
+            <div class="dre-row total"><span class="dre-label">= RECEITA LÍQUIDA</span><span class="dre-value">R$ 148.821</span></div>
+            <div class="dre-section" style="margin-top:8px;">CUSTOS E DESPESAS</div>
+            <div class="dre-row"><span class="dre-label">(-) Pessoal & RH</span><span class="dre-value" style="color:var(--danger)">-R$ 38.200</span></div>
+            <div class="dre-row"><span class="dre-label">(-) Aluguel & Infraestrutura</span><span class="dre-value" style="color:var(--danger)">-R$ 6.800</span></div>
+            <div class="dre-row"><span class="dre-label">(-) Marketing & Vendas</span><span class="dre-value" style="color:var(--danger)">-R$ 8.400</span></div>
+            <div class="dre-row"><span class="dre-label">(-) TI & Software</span><span class="dre-value" style="color:var(--danger)">-R$ 3.200</span></div>
+            <div class="dre-row"><span class="dre-label">(-) Administrativo</span><span class="dre-value" style="color:var(--danger)">-R$ 4.040</span></div>
+            <div class="dre-row total"><span class="dre-label">= EBITDA</span><span class="dre-value" style="color:var(--gold)">R$ 88.181</span></div>
+            <div class="dre-section" style="margin-top:8px;">RESULTADO FINAL</div>
+            <div class="dre-row"><span class="dre-label">(-) Depreciação / Amortização</span><span class="dre-value" style="color:var(--danger)">-R$ 1.200</span></div>
+            <div class="dre-row"><span class="dre-label">(-) Despesas Financeiras</span><span class="dre-value" style="color:var(--danger)">-R$ 380</span></div>
+            <div class="dre-row total" style="background:var(--success-bg);">
+              <span class="dre-label" style="color:var(--success);font-weight:800;">= LUCRO LÍQUIDO 💰</span>
+              <span class="dre-value" style="color:var(--success);font-size:16px;">R$ 68.680</span>
+            </div>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom:20px;">
+              <div class="card-header"><div class="card-title">📊 Composição da Receita</div></div>
+              <div class="chart-wrap"><canvas id="dreRevenueChart"></canvas></div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">📈 Evolução EBITDA — 6M</div></div>
+              <div class="chart-wrap"><canvas id="ebitdaChart"></canvas></div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end dre -->
+
+      <!-- ===== CONTAS A PAGAR ===== -->
+      <div class="page" id="page-payables">
+        <div class="section-title">🔴 Contas a Pagar</div>
+        <div class="section-sub">Gestão de obrigações financeiras</div>
+        <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;">
+          <div class="kpi-card"><div class="kpi-icon">📅</div><div class="kpi-label">Vencendo Hoje</div><div class="kpi-value" style="color:var(--danger)">R$ 5.400</div><div class="kpi-change down">2 contas</div></div>
+          <div class="kpi-card"><div class="kpi-icon">⚠️</div><div class="kpi-label">Esta Semana</div><div class="kpi-value" style="color:var(--warning)">R$ 18.200</div><div class="kpi-change neutral">6 contas</div></div>
+          <div class="kpi-card"><div class="kpi-icon">🗓️</div><div class="kpi-label">Este Mês</div><div class="kpi-value">R$ 32.100</div><div class="kpi-change neutral">8 contas</div></div>
+          <div class="kpi-card"><div class="kpi-icon">✅</div><div class="kpi-label">Pagas no Mês</div><div class="kpi-value" style="color:var(--success)">R$ 57.540</div><div class="kpi-change up">24 contas</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📋 Contas a Pagar</div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn btn-primary" onclick="openModal('lancamentoModal')">+ Nova Conta</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Vencimento</th><th>Fornecedor</th><th>Descrição</th><th>Categoria</th><th>Valor</th><th>Status</th><th>Ações</th></tr></thead>
+              <tbody>
+                <tr><td style="color:var(--danger);font-weight:700;">22/05 ⚠️</td><td>Vivo Fibra</td><td>Internet Empresarial</td><td><span class="badge badge-gray">TI</span></td><td style="font-weight:700;">R$ 350</td><td><span class="badge badge-danger">Vence hoje</span></td><td><button class="btn btn-success" style="padding:4px 10px;font-size:11px;" onclick="showToast('✅ Pagamento registrado!')">Pagar</button></td></tr>
+                <tr><td style="color:var(--danger);font-weight:700;">22/05 ⚠️</td><td>Adobe Inc</td><td>Creative Cloud</td><td><span class="badge badge-gray">Software</span></td><td style="font-weight:700;">R$ 320</td><td><span class="badge badge-danger">Vence hoje</span></td><td><button class="btn btn-success" style="padding:4px 10px;font-size:11px;" onclick="showToast('✅ Pagamento registrado!')">Pagar</button></td></tr>
+                <tr><td style="color:var(--warning);font-weight:700;">24/05</td><td>Lajes Imóveis</td><td>Aluguel Sede</td><td><span class="badge badge-warning">Imóvel</span></td><td style="font-weight:700;">R$ 3.200</td><td><span class="badge badge-warning">Em 2 dias</span></td><td><button class="btn btn-success" style="padding:4px 10px;font-size:11px;" onclick="showToast('✅ Pagamento registrado!')">Pagar</button></td></tr>
+                <tr><td>25/05</td><td>Receita Federal</td><td>DAS Simples Nacional</td><td><span class="badge badge-danger">Imposto</span></td><td style="font-weight:700;">R$ 4.200</td><td><span class="badge badge-warning">Em 3 dias</span></td><td><button class="btn btn-success" style="padding:4px 10px;font-size:11px;" onclick="showToast('✅ Pagamento registrado!')">Pagar</button></td></tr>
+                <tr><td>28/05</td><td>Equipe Tech</td><td>Freelancer Dev</td><td><span class="badge badge-gray">TI</span></td><td style="font-weight:700;">R$ 2.400</td><td><span class="badge badge-info">Pendente</span></td><td><button class="btn btn-success" style="padding:4px 10px;font-size:11px;" onclick="showToast('✅ Pagamento registrado!')">Pagar</button></td></tr>
+                <tr><td>30/05</td><td>Meta Ads</td><td>Tráfego Pago</td><td><span class="badge badge-gold">Marketing</span></td><td style="font-weight:700;">R$ 5.800</td><td><span class="badge badge-info">Pendente</span></td><td><button class="btn btn-success" style="padding:4px 10px;font-size:11px;" onclick="showToast('✅ Pagamento registrado!')">Pagar</button></td></tr>
+                <tr><td>05/06</td><td>Contabilidade ABC</td><td>Honorários Contábeis</td><td><span class="badge badge-gold">Contábil</span></td><td style="font-weight:700;">R$ 1.800</td><td><span class="badge badge-gray">Próximo mês</span></td><td><button class="btn btn-outline" style="padding:4px 10px;font-size:11px;">Agendar</button></td></tr>
+                <tr><td>10/06</td><td>Salesforce</td><td>CRM Empresarial</td><td><span class="badge badge-gray">Software</span></td><td style="font-weight:700;">R$ 680</td><td><span class="badge badge-gray">Próximo mês</span></td><td><button class="btn btn-outline" style="padding:4px 10px;font-size:11px;">Agendar</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!-- end payables -->
+
+      <!-- ===== CONTAS A RECEBER ===== -->
+      <div class="page" id="page-receivables">
+        <div class="section-title">🟢 Contas a Receber</div>
+        <div class="section-sub">Gestão de recebimentos e cobranças</div>
+        <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;">
+          <div class="kpi-card"><div class="kpi-icon">📅</div><div class="kpi-label">Receber Hoje</div><div class="kpi-value" style="color:var(--success)">R$ 12.000</div><div class="kpi-change up">2 títulos</div></div>
+          <div class="kpi-card"><div class="kpi-icon">📆</div><div class="kpi-label">Esta Semana</div><div class="kpi-value">R$ 34.500</div><div class="kpi-change up">5 títulos</div></div>
+          <div class="kpi-card"><div class="kpi-icon">🗓️</div><div class="kpi-label">Total em Aberto</div><div class="kpi-value">R$ 74.500</div><div class="kpi-change neutral">12 títulos</div></div>
+          <div class="kpi-card"><div class="kpi-icon">⚠️</div><div class="kpi-label">Em Atraso</div><div class="kpi-value" style="color:var(--danger)">R$ 8.200</div><div class="kpi-change down">3 títulos</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📋 Títulos a Receber</div>
+            <button class="btn btn-primary" onclick="openModal('lancamentoModal')">+ Nova Receita</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Vencimento</th><th>Cliente</th><th>Descrição</th><th>NF</th><th>Valor</th><th>Status</th><th>Ações</th></tr></thead>
+              <tbody>
+                <tr><td style="color:var(--danger);font-weight:700;">15/05 🔴</td><td>Empresa Alpha</td><td>Consultoria Q1</td><td>NF#1038</td><td style="color:var(--success);font-weight:700;">R$ 3.200</td><td><span class="badge badge-danger">Atrasado 7d</span></td><td><button class="btn btn-primary" style="padding:4px 10px;font-size:11px;" onclick="showToast('📱 Cobrança enviada via WhatsApp!')">Cobrar</button></td></tr>
+                <tr><td style="color:var(--danger);font-weight:700;">18/05 🔴</td><td>Carlos Mendes PF</td><td>Mentoria Financeira</td><td>NF#1039</td><td style="color:var(--success);font-weight:700;">R$ 1.800</td><td><span class="badge badge-danger">Atrasado 4d</span></td><td><button class="btn btn-primary" style="padding:4px 10px;font-size:11px;" onclick="showToast('📱 Cobrança enviada via WhatsApp!')">Cobrar</button></td></tr>
+                <tr><td style="color:var(--danger);font-weight:700;">20/05 🔴</td><td>Rodrigo Silva</td><td>Assessoria PF Maio</td><td>NF#1040</td><td style="color:var(--success);font-weight:700;">R$ 3.200</td><td><span class="badge badge-danger">Atrasado 2d</span></td><td><button class="btn btn-primary" style="padding:4px 10px;font-size:11px;" onclick="showToast('📱 Cobrança enviada!')">Cobrar</button></td></tr>
+                <tr><td>22/05</td><td>Empresa Beta Ltda</td><td>Relatório Executivo</td><td>NF#1041</td><td style="color:var(--success);font-weight:700;">R$ 8.400</td><td><span class="badge badge-warning">Vence hoje</span></td><td><button class="btn btn-success" style="padding:4px 10px;font-size:11px;" onclick="showToast('✅ Recebimento registrado!')">Recebido</button></td></tr>
+                <tr><td>25/05</td><td>Startup Tech</td><td>Assessoria Financeira</td><td>NF#1042</td><td style="color:var(--success);font-weight:700;">R$ 12.000</td><td><span class="badge badge-info">Pendente</span></td><td><button class="btn btn-success" style="padding:4px 10px;font-size:11px;" onclick="showToast('✅ Recebimento registrado!')">Recebido</button></td></tr>
+                <tr><td>28/05</td><td>Marina Costa PF</td><td>Planejamento Financeiro</td><td>NF#1043</td><td style="color:var(--success);font-weight:700;">R$ 2.400</td><td><span class="badge badge-info">Pendente</span></td><td><button class="btn btn-success" style="padding:4px 10px;font-size:11px;" onclick="showToast('✅ Recebimento registrado!')">Recebido</button></td></tr>
+                <tr><td>30/05</td><td>Grupo Omega S/A</td><td>Consultoria Estratégica</td><td>NF#1044</td><td style="color:var(--success);font-weight:700;">R$ 18.000</td><td><span class="badge badge-info">Pendente</span></td><td><button class="btn btn-success" style="padding:4px 10px;font-size:11px;" onclick="showToast('✅ Recebimento registrado!')">Recebido</button></td></tr>
+                <tr><td>05/06</td><td>Pedro Alves PF</td><td>Mentoria Premium</td><td>NF#1045</td><td style="color:var(--success);font-weight:700;">R$ 4.800</td><td><span class="badge badge-gray">Futuro</span></td><td><button class="btn btn-outline" style="padding:4px 10px;font-size:11px;">Detalhe</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!-- end receivables -->
+
+      <!-- ===== CARTÕES ===== -->
+      <div class="page" id="page-cards">
+        <div class="section-title">💳 Gestão de Cartões</div>
+        <div class="section-sub">Controle de cartões, faturas e parcelas</div>
+        <div class="grid-2" style="margin-bottom:20px;">
+          <!-- CARTÃO 1 -->
+          <div>
+            <div class="credit-card" style="background:linear-gradient(135deg,#1B3A2A,#2A4A38);">
+              <div style="position:absolute;top:20px;right:24px;text-align:right;">
+                <div style="font-size:10px;opacity:0.5;color:white;">LIMITE DISPONÍVEL</div>
+                <div style="font-size:18px;font-weight:700;color:var(--gold-light);">R$ 31.760</div>
+              </div>
+              <div class="card-chip">💎</div>
+              <div class="card-number">•••• •••• •••• 4821</div>
+              <div class="card-info">
+                <div><div class="card-holder" style="color:rgba(255,255,255,0.5);">TITULAR</div><div class="card-name">EMPRESA XYZ LTDA</div></div>
+                <div><div class="card-exp-label">VALIDADE</div><div class="card-exp">09/28</div></div>
+                <div style="font-size:18px;">NUBANK</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">Nubank PJ — Detalhes</div></div>
+              <div class="stat-line"><span class="stat-name">💳 Limite Total</span><span class="stat-val">R$ 50.000</span></div>
+              <div class="stat-line"><span class="stat-name">🔴 Fatura Atual</span><span class="stat-val" style="color:var(--danger)">R$ 18.240</span></div>
+              <div class="stat-line"><span class="stat-name">✅ Limite Disponível</span><span class="stat-val" style="color:var(--success)">R$ 31.760</span></div>
+              <div class="stat-line"><span class="stat-name">📅 Fechamento</span><span class="stat-val">Dia 15</span></div>
+              <div class="stat-line"><span class="stat-name">⚠️ Vencimento</span><span class="stat-val" style="color:var(--danger)">28/05/2026</span></div>
+              <div class="stat-line"><span class="stat-name">🔄 Parcelas em Aberto</span><span class="stat-val">5 parcelas</span></div>
+              <hr class="sep">
+              <div style="margin-bottom:6px;">
+                <div class="meta-header"><span class="meta-name">Uso do Limite</span><span class="meta-pct" style="color:var(--danger)">36,5%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:36.5%;background:linear-gradient(90deg,var(--success),var(--warning))"></div></div>
+              </div>
+            </div>
+          </div>
+          <!-- CARTÃO 2 -->
+          <div>
+            <div class="credit-card" style="background:linear-gradient(135deg,#0D2137,#1A3A5A);">
+              <div style="position:absolute;top:20px;right:24px;text-align:right;">
+                <div style="font-size:10px;opacity:0.5;color:white;">LIMITE DISPONÍVEL</div>
+                <div style="font-size:18px;font-weight:700;color:#64B5F6;">R$ 22.400</div>
+              </div>
+              <div class="card-chip">💙</div>
+              <div class="card-number">•••• •••• •••• 7654</div>
+              <div class="card-info">
+                <div><div class="card-holder" style="color:rgba(255,255,255,0.5);">TITULAR</div><div class="card-name">EMPRESA XYZ LTDA</div></div>
+                <div><div class="card-exp-label">VALIDADE</div><div class="card-exp">03/27</div></div>
+                <div style="font-size:18px;">INTER</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">Banco Inter PJ — Detalhes</div></div>
+              <div class="stat-line"><span class="stat-name">💳 Limite Total</span><span class="stat-val">R$ 30.000</span></div>
+              <div class="stat-line"><span class="stat-name">🟡 Fatura Atual</span><span class="stat-val" style="color:var(--warning)">R$ 7.600</span></div>
+              <div class="stat-line"><span class="stat-name">✅ Limite Disponível</span><span class="stat-val" style="color:var(--success)">R$ 22.400</span></div>
+              <div class="stat-line"><span class="stat-name">📅 Fechamento</span><span class="stat-val">Dia 20</span></div>
+              <div class="stat-line"><span class="stat-name">⚠️ Vencimento</span><span class="stat-val">05/06/2026</span></div>
+              <div class="stat-line"><span class="stat-name">🔄 Parcelas em Aberto</span><span class="stat-val">3 parcelas</span></div>
+              <hr class="sep">
+              <div style="margin-bottom:6px;">
+                <div class="meta-header"><span class="meta-name">Uso do Limite</span><span class="meta-pct" style="color:var(--success)">25,3%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:25.3%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- LANÇAMENTOS DO CARTÃO -->
+        <div class="card">
+          <div class="card-header"><div class="card-title">📋 Lançamentos Nubank PJ — Maio/2026</div></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Data</th><th>Estabelecimento</th><th>Categoria</th><th>Parcelas</th><th>Valor</th></tr></thead>
+              <tbody>
+                <tr><td>10/05</td><td>Google Ads</td><td><span class="badge badge-gold">Marketing</span></td><td>1/1</td><td style="color:var(--danger);font-weight:600;">R$ 4.200</td></tr>
+                <tr><td>12/05</td><td>Amazon AWS</td><td><span class="badge badge-gray">TI / Cloud</span></td><td>1/1</td><td style="color:var(--danger);font-weight:600;">R$ 1.840</td></tr>
+                <tr><td>14/05</td><td>Restaurante Gourmet</td><td><span class="badge badge-warning">Alimentação</span></td><td>1/1</td><td style="color:var(--danger);font-weight:600;">R$ 380</td></tr>
+                <tr><td>15/05</td><td>MacBook Pro 16" — Apple</td><td><span class="badge badge-gray">Equipamento</span></td><td>3/12</td><td style="color:var(--danger);font-weight:600;">R$ 1.200</td></tr>
+                <tr><td>17/05</td><td>Hotmart — Curso Online</td><td><span class="badge badge-info">Treinamento</span></td><td>1/1</td><td style="color:var(--danger);font-weight:600;">R$ 497</td></tr>
+                <tr><td>18/05</td><td>Uber Empresarial</td><td><span class="badge badge-gray">Transporte</span></td><td>1/1</td><td style="color:var(--danger);font-weight:600;">R$ 340</td></tr>
+                <tr><td>20/05</td><td>LinkedIn Premium</td><td><span class="badge badge-gold">Marketing</span></td><td>1/1</td><td style="color:var(--danger);font-weight:600;">R$ 219</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!-- end cards -->
+
+      <!-- ===== CONCILIAÇÃO ===== -->
+      <div class="page" id="page-conciliation">
+        <div class="section-title">🏦 Conciliação Bancária Inteligente</div>
+        <div class="section-sub">Importação e categorização automática com IA · Conta Corrente Nubank PJ</div>
+
+        <div class="grid-2" style="margin-bottom:20px;">
+          <div class="card">
+            <div class="card-header"><div class="card-title">📥 Importar Extrato Bancário</div></div>
+            <div class="upload-area" onclick="showToast('📁 Selecione o arquivo OFX, CSV, PDF ou Excel')">
+              <div class="upload-icon">📂</div>
+              <div class="upload-text"><strong>Arraste o arquivo aqui</strong> ou clique para selecionar</div>
+              <div class="upload-types">Formatos aceitos: OFX · CSV · Excel (.xlsx) · PDF · TXT</div>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;">
+              <button class="btn btn-outline" style="font-size:12px;" onclick="simulateConciliation()">📊 OFX Automático</button>
+              <button class="btn btn-outline" style="font-size:12px;" onclick="simulateConciliation()">📑 PDF Extrato</button>
+              <button class="btn btn-outline" style="font-size:12px;" onclick="simulateConciliation()">📋 Excel/CSV</button>
+              <button class="btn btn-primary" style="font-size:12px;" onclick="simulateConciliation()">🤖 Processar com IA</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">📊 Status da Conciliação</div></div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div class="stat-line"><span class="stat-name">📋 Lançamentos importados</span><span class="stat-val">247</span></div>
+              <div class="stat-line"><span class="stat-name">✅ Conciliados automaticamente</span><span class="stat-val" style="color:var(--success)">211 (85%)</span></div>
+              <div class="stat-line"><span class="stat-name">⚠️ Aguardando revisão</span><span class="stat-val" style="color:var(--warning)">28 (11%)</span></div>
+              <div class="stat-line"><span class="stat-name">🔴 Possíveis duplicidades</span><span class="stat-val" style="color:var(--danger)">8 (3%)</span></div>
+              <div class="stat-line"><span class="stat-name">🤖 Categorizados por IA</span><span class="stat-val" style="color:var(--gold)">219 (89%)</span></div>
+              <hr class="sep">
+              <div>
+                <div class="meta-header"><span class="meta-name">Taxa de Conciliação</span><span class="meta-pct">96%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:96%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LANÇAMENTOS COM IA -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🤖 Lançamentos — Categorização por IA</div>
+            <div style="display:flex;gap:8px;">
+              <button class="btn btn-primary" style="font-size:12px;" onclick="showToast('✅ Todas as sugestões aceitas!')">✅ Aceitar Todas</button>
+              <button class="btn btn-outline" style="font-size:12px;">🔍 Revisar Pendentes</button>
+            </div>
+          </div>
+          <div id="bankList">
+            <div class="bank-row">
+              <div class="bank-icon">📱</div>
+              <div class="bank-info">
+                <div class="bank-desc">PIX RECEBIDO — EMPRESA ALPHA LTDA</div>
+                <div class="bank-detail">22/05/2026 · Banco Bradesco · ChavePix: empresa@alpha.com</div>
+              </div>
+              <div>
+                <div class="bank-amount credit">+R$ 12.000</div>
+                <div style="font-size:10px;color:var(--gray-400);">Consultoria</div>
+              </div>
+              <div style="text-align:right;">
+                <span class="concil-ai-tag">🤖 IA: Consultoria</span>
+                <div style="margin-top:4px;"><button class="btn btn-success" style="padding:3px 8px;font-size:10px;" onclick="showToast('✅ Aceito!')">✓</button></div>
+              </div>
+            </div>
+            <div class="bank-row">
+              <div class="bank-icon">🏠</div>
+              <div class="bank-info">
+                <div class="bank-desc">TED ENVIADO — LAJES IMOVEIS</div>
+                <div class="bank-detail">21/05/2026 · Banco Itaú</div>
+              </div>
+              <div>
+                <div class="bank-amount debit">-R$ 3.200</div>
+                <div style="font-size:10px;color:var(--gray-400);">Aluguel</div>
+              </div>
+              <div style="text-align:right;">
+                <span class="concil-ai-tag">🤖 IA: Aluguel</span>
+                <div style="margin-top:4px;"><button class="btn btn-success" style="padding:3px 8px;font-size:10px;" onclick="showToast('✅ Aceito!')">✓</button></div>
+              </div>
+            </div>
+            <div class="bank-row" style="border-color:var(--warning);background:var(--warning-bg);">
+              <div class="bank-icon">❓</div>
+              <div class="bank-info">
+                <div class="bank-desc">PIX ENVIADO — LUCIANO MARTINS</div>
+                <div class="bank-detail">20/05/2026 · Nubank · Chave CPF</div>
+              </div>
+              <div>
+                <div class="bank-amount debit">-R$ 850</div>
+                <div style="font-size:10px;color:var(--warning);">Não identificado</div>
+              </div>
+              <div style="text-align:right;">
+                <span class="concil-ai-tag" style="background:var(--warning-bg);color:var(--warning);border:1px solid var(--warning);">⚠️ Revisar</span>
+                <div style="margin-top:4px;">
+                  <select class="form-control" style="padding:3px 6px;font-size:10px;width:120px;">
+                    <option>Categorizar...</option>
+                    <option>Freelancer</option>
+                    <option>Fornecedor</option>
+                    <option>Pessoal</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="bank-row">
+              <div class="bank-icon">📶</div>
+              <div class="bank-info">
+                <div class="bank-desc">DÉBITO AUTOMÁTICO — VIVO FIBRA SP</div>
+                <div class="bank-detail">20/05/2026 · Débito automático</div>
+              </div>
+              <div>
+                <div class="bank-amount debit">-R$ 350</div>
+                <div style="font-size:10px;color:var(--gray-400);">Internet</div>
+              </div>
+              <div style="text-align:right;">
+                <span class="concil-ai-tag">🤖 IA: Internet</span>
+                <div style="margin-top:4px;font-size:11px;color:var(--gold);">🔄 Recorrente</div>
+              </div>
+            </div>
+            <div class="bank-row" style="border-color:var(--danger-bg);background:var(--danger-bg);">
+              <div class="bank-icon">⚠️</div>
+              <div class="bank-info">
+                <div class="bank-desc">BOLETO — FORNECEDOR X LTDA</div>
+                <div class="bank-detail">19/05/2026 · Possível duplicidade detectada!</div>
+              </div>
+              <div>
+                <div class="bank-amount debit">-R$ 1.800</div>
+                <div style="font-size:10px;color:var(--danger);">Possível duplicidade</div>
+              </div>
+              <div style="text-align:right;">
+                <span class="concil-ai-tag" style="background:var(--danger-bg);color:var(--danger);border:1px solid var(--danger);">🔴 Duplicidade?</span>
+                <div style="margin-top:4px;"><button class="btn btn-danger" style="padding:3px 8px;font-size:10px;" onclick="showToast('⚠️ Possível duplicidade marcada para revisão!')">Revisar</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end conciliation -->
+
+      <!-- ===== MENTORIA ===== -->
+      <div class="page" id="page-mentoring">
+        <div class="section-title">🎯 Mentoria & Assessoria Financeira</div>
+        <div class="section-sub">Acompanhamento personalizado do cliente · Empresa XYZ Ltda</div>
+
+        <div class="grid-2" style="margin-bottom:20px;">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">👤 Perfil do Cliente</div>
+              <button class="btn btn-primary" style="padding:6px 12px;font-size:11px;" onclick="showToast('📋 Perfil atualizado!')">Atualizar</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;padding:16px;background:var(--gray-100);border-radius:var(--radius-sm);">
+              <div style="width:56px;height:56px;background:linear-gradient(135deg,var(--gold),var(--brown));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:white;">E</div>
+              <div>
+                <div style="font-size:16px;font-weight:700;color:var(--gray-700);">Empresa XYZ Ltda</div>
+                <div style="font-size:12px;color:var(--gray-400);">CNPJ: 12.345.678/0001-99 · Simples Nacional</div>
+                <div style="display:flex;gap:6px;margin-top:6px;">
+                  <span class="badge badge-gold">PJ</span>
+                  <span class="badge badge-info">Consultoria</span>
+                  <span class="badge badge-success">Cliente Premium</span>
+                </div>
+              </div>
+            </div>
+            <div class="stat-line"><span class="stat-name">📅 Cliente desde</span><span class="stat-val">Janeiro 2025</span></div>
+            <div class="stat-line"><span class="stat-name">🎯 Plano</span><span class="stat-val">Mentoria Premium 360°</span></div>
+            <div class="stat-line"><span class="stat-name">💰 Mensalidade</span><span class="stat-val" style="color:var(--gold)">R$ 3.500/mês</span></div>
+            <div class="stat-line"><span class="stat-name">📊 Reuniões realizadas</span><span class="stat-val">17 reuniões</span></div>
+            <div class="stat-line"><span class="stat-name">📱 Responsável</span><span class="stat-val">Ana Lima (Assessora)</span></div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">🎯 Plano de Metas</div><button class="btn btn-outline" style="padding:5px 10px;font-size:11px;" onclick="showToast('🎯 Nova meta criada!')">+ Meta</button></div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div>
+                <div class="meta-header"><span class="meta-name">💰 Faturamento Mensal R$ 180k</span><span class="meta-pct">88%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div>
+                <div class="meta-sub">Prazo: 31/05/2026 · Responsável: CEO</div>
+              </div>
+              <div>
+                <div class="meta-header"><span class="meta-name">🏦 Reserva de Emergência R$ 100k</span><span class="meta-pct">62%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:62%"></div></div>
+                <div class="meta-sub">Prazo: 31/12/2026 · Em curso</div>
+              </div>
+              <div>
+                <div class="meta-header"><span class="meta-name">📉 Reduzir Custos Fixos 20%</span><span class="meta-pct">45%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:45%;background:linear-gradient(90deg,var(--warning),var(--gold))"></div></div>
+                <div class="meta-sub">Prazo: 30/06/2026 · Abaixo do esperado</div>
+              </div>
+              <div>
+                <div class="meta-header"><span class="meta-name">💎 Patrimônio Líquido R$ 1M</span><span class="meta-pct">71%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:71%"></div></div>
+                <div class="meta-sub">Prazo: 31/12/2027 · No prazo</div>
+              </div>
+              <div>
+                <div class="meta-header"><span class="meta-name">👥 Expandir Equipe +2 pessoas</span><span class="meta-pct">50%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:50%;background:linear-gradient(90deg,var(--info),var(--gold-light))"></div></div>
+                <div class="meta-sub">1 de 2 contratações realizadas</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:20px;">
+          <div class="card">
+            <div class="card-header"><div class="card-title">✅ Plano de Ação — Tarefas</div><button class="btn btn-outline" style="padding:5px 10px;font-size:11px;" onclick="showToast('✅ Tarefa criada!')">+ Tarefa</button></div>
+            <div>
+              <div class="task-item">
+                <div class="task-check done" onclick="this.classList.toggle('done');this.nextElementSibling.classList.toggle('done')">✓</div>
+                <div class="task-text done">Análise do fluxo de caixa Q1 2026</div>
+                <div class="task-due"><span class="badge badge-success">Concluído</span></div>
+              </div>
+              <div class="task-item">
+                <div class="task-check done" onclick="this.classList.toggle('done');this.nextElementSibling.classList.toggle('done')">✓</div>
+                <div class="task-text done">Renegociar contrato com fornecedores</div>
+                <div class="task-due"><span class="badge badge-success">Concluído</span></div>
+              </div>
+              <div class="task-item">
+                <div class="task-check" onclick="this.classList.toggle('done');this.nextElementSibling.classList.toggle('done')"></div>
+                <div class="task-text">Revisar DRE de Maio e validar margens</div>
+                <div class="task-due">até 28/05</div>
+              </div>
+              <div class="task-item">
+                <div class="task-check" onclick="this.classList.toggle('done');this.nextElementSibling.classList.toggle('done')"></div>
+                <div class="task-text">Abrir conta poupança empresarial reserva</div>
+                <div class="task-due">até 30/05</div>
+              </div>
+              <div class="task-item">
+                <div class="task-check" onclick="this.classList.toggle('done');this.nextElementSibling.classList.toggle('done')"></div>
+                <div class="task-text">Criar política de precificação atualizada</div>
+                <div class="task-due"><span class="badge badge-warning">Em atraso</span></div>
+              </div>
+              <div class="task-item">
+                <div class="task-check" onclick="this.classList.toggle('done');this.nextElementSibling.classList.toggle('done')"></div>
+                <div class="task-text">Contratar contador especialista em Simples</div>
+                <div class="task-due">até 15/06</div>
+              </div>
+              <div class="task-item">
+                <div class="task-check" onclick="this.classList.toggle('done');this.nextElementSibling.classList.toggle('done')"></div>
+                <div class="task-text">Implementar gestão de custos por projeto</div>
+                <div class="task-due">até 30/06</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">📝 Histórico de Reuniões</div><button class="btn btn-primary" style="padding:5px 10px;font-size:11px;" onclick="showToast('📝 Nova reunião agendada!')">+ Reunião</button></div>
+            <ul class="timeline">
+              <li class="timeline-item">
+                <div class="timeline-date">15/05/2026 · 14h00 · 60 min</div>
+                <div class="timeline-text"><strong>Revisão Fluxo de Caixa Maio:</strong> Análise das despesas recorrentes, redução de 3,2% identificada. Foco em diversificação de clientes. Próximo passo: relatório executivo semestral.</div>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-date">30/04/2026 · 15h30 · 90 min</div>
+                <div class="timeline-text"><strong>Planejamento Q2 2026:</strong> Definição de metas de faturamento R$180k/mês. Estratégia de expansão de carteira. Estrutura de precificação revisada.</div>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-date">15/04/2026 · 09h00 · 60 min</div>
+                <div class="timeline-text"><strong>DRE Q1 2026:</strong> Resultado excepcional com margem de 42%. Recomendação para provisionar 15% para reserva de emergência.</div>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-date">28/03/2026</div>
+                <div class="timeline-text"><strong>Renegociação de Contratos:</strong> Economia de R$ 2.400/mês identificada com 3 fornecedores. Implementação concluída.</div>
+              </li>
+              <li class="timeline-item">
+                <div class="timeline-date">14/03/2026</div>
+                <div class="timeline-text"><strong>Onboarding Expandido:</strong> Inclusão do módulo de investimentos e mapeamento completo do patrimônio. 12 ativos identificados.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><div class="card-title">📋 Relatório de Acompanhamento — Assessora Ana Lima</div><button class="btn btn-primary" onclick="showToast('📄 Relatório de mentoria gerado em PDF!')" style="font-size:12px;">📥 Gerar PDF</button></div>
+          <div class="grid-3">
+            <div style="padding:16px;background:var(--success-bg);border-radius:var(--radius-sm);">
+              <div style="font-size:20px;margin-bottom:8px;">🏆</div>
+              <div style="font-size:13px;font-weight:700;color:var(--success);margin-bottom:4px;">Pontos Fortes</div>
+              <div style="font-size:12px;color:var(--gray-600);">✅ Margem de lucro acima de 40% consistente<br>✅ Crescimento de 61% em 6 meses<br>✅ Disciplina nos lançamentos financeiros<br>✅ Equipe engajada nas metas</div>
+            </div>
+            <div style="padding:16px;background:var(--warning-bg);border-radius:var(--radius-sm);">
+              <div style="font-size:20px;margin-bottom:8px;">⚠️</div>
+              <div style="font-size:13px;font-weight:700;color:var(--warning);margin-bottom:4px;">Pontos de Melhoria</div>
+              <div style="font-size:12px;color:var(--gray-600);">⚠️ Alta dependência de 2 clientes (48%)<br>⚠️ Reserva de emergência abaixo do ideal<br>⚠️ Precificação pode ser revisada para cima<br>⚠️ Custos de marketing sem métricas claras</div>
+            </div>
+            <div style="padding:16px;background:var(--info-bg);border-radius:var(--radius-sm);">
+              <div style="font-size:20px;margin-bottom:8px;">🚀</div>
+              <div style="font-size:13px;font-weight:700;color:var(--info);margin-bottom:4px;">Próximos Passos</div>
+              <div style="font-size:12px;color:var(--gray-600);">🎯 Prospectar 5 novos clientes em Junho<br>🎯 Aumentar ticket médio em 15%<br>🎯 Automatizar cobranças recorrentes<br>🎯 Criar produto digital escalável</div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end mentoring -->
+
+      <!-- ===== RELATÓRIOS ===== -->
+      <div class="page" id="page-reports">
+        <div class="section-title">📋 Central de Relatórios</div>
+        <div class="section-sub">Geração automática de relatórios financeiros profissionais</div>
+
+        <div class="grid-4" style="margin-bottom:24px;">
+          <div class="card" style="text-align:center;cursor:pointer;" onclick="showToast('📊 Gerando Relatório Executivo em PDF...')">
+            <div style="font-size:40px;margin-bottom:12px;">📊</div>
+            <div style="font-weight:700;color:var(--gray-700);margin-bottom:4px;">Relatório Executivo</div>
+            <div style="font-size:11px;color:var(--gray-400);margin-bottom:12px;">Visão completa do período</div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;font-size:12px;">📥 Gerar PDF</button>
+          </div>
+          <div class="card" style="text-align:center;cursor:pointer;" onclick="showToast('📈 Gerando DRE completa...')">
+            <div style="font-size:40px;margin-bottom:12px;">📈</div>
+            <div style="font-weight:700;color:var(--gray-700);margin-bottom:4px;">DRE Completa</div>
+            <div style="font-size:11px;color:var(--gray-400);margin-bottom:12px;">Demonstrativo de Resultados</div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;font-size:12px;">📥 Gerar PDF</button>
+          </div>
+          <div class="card" style="text-align:center;cursor:pointer;" onclick="showToast('💸 Gerando relatório de Fluxo de Caixa...')">
+            <div style="font-size:40px;margin-bottom:12px;">💸</div>
+            <div style="font-weight:700;color:var(--gray-700);margin-bottom:4px;">Fluxo de Caixa</div>
+            <div style="font-size:11px;color:var(--gray-400);margin-bottom:12px;">Entradas e saídas detalhadas</div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;font-size:12px;">📥 Gerar Excel</button>
+          </div>
+          <div class="card" style="text-align:center;cursor:pointer;" onclick="showToast('🎯 Gerando relatório de Mentoria...')">
+            <div style="font-size:40px;margin-bottom:12px;">🎯</div>
+            <div style="font-weight:700;color:var(--gray-700);margin-bottom:4px;">Relatório Mentoria</div>
+            <div style="font-size:11px;color:var(--gray-400);margin-bottom:12px;">Progresso e plano de ação</div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;font-size:12px;">📥 Gerar PDF</button>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><div class="card-title">⚙️ Personalizar Relatório</div></div>
+            <div class="form-group">
+              <label class="form-label">Tipo de Relatório</label>
+              <select class="form-control">
+                <option>Relatório Executivo Completo</option>
+                <option>DRE Simplificada</option>
+                <option>Fluxo de Caixa</option>
+                <option>Análise de Despesas</option>
+                <option>Conciliação Bancária</option>
+                <option>Relatório de Mentoria</option>
+                <option>Comparativo Mensal</option>
+              </select>
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Período Inicial</label>
+                <input type="date" class="form-control" value="2026-05-01">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Período Final</label>
+                <input type="date" class="form-control" value="2026-05-31">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Formato de Saída</label>
+              <select class="form-control">
+                <option>PDF Executivo (Recomendado)</option>
+                <option>Excel Detalhado</option>
+                <option>PDF + Excel</option>
+                <option>Apenas Gráficos</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Incluir</label>
+              <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox" checked> Gráficos e Charts</label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox" checked> Análise da IA</label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox" checked> Metas e Progressos</label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox"> Extratos Detalhados</label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;"><input type="checkbox" checked> Comparativo com mês anterior</label>
+              </div>
+            </div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="showToast('📊 Gerando relatório personalizado... Pronto em instantes!')">
+              🚀 Gerar Relatório Automático
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">📅 Relatórios Recentes</div></div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Relatório</th><th>Data</th><th>Formato</th><th>Ação</th></tr></thead>
+                <tbody>
+                  <tr><td>Executivo Maio/26</td><td>22/05/26</td><td><span class="badge badge-danger">PDF</span></td><td><button class="btn btn-outline" style="padding:3px 8px;font-size:11px;" onclick="showToast('📥 Download iniciado!')">📥</button></td></tr>
+                  <tr><td>DRE Abril/26</td><td>01/05/26</td><td><span class="badge badge-success">Excel</span></td><td><button class="btn btn-outline" style="padding:3px 8px;font-size:11px;" onclick="showToast('📥 Download iniciado!')">📥</button></td></tr>
+                  <tr><td>Fluxo Q1/26</td><td>01/04/26</td><td><span class="badge badge-danger">PDF</span></td><td><button class="btn btn-outline" style="padding:3px 8px;font-size:11px;" onclick="showToast('📥 Download iniciado!')">📥</button></td></tr>
+                  <tr><td>Mentoria Mar/26</td><td>31/03/26</td><td><span class="badge badge-danger">PDF</span></td><td><button class="btn btn-outline" style="padding:3px 8px;font-size:11px;" onclick="showToast('📥 Download iniciado!')">📥</button></td></tr>
+                  <tr><td>Conciliação Fev/26</td><td>28/02/26</td><td><span class="badge badge-success">Excel</span></td><td><button class="btn btn-outline" style="padding:3px 8px;font-size:11px;" onclick="showToast('📥 Download iniciado!')">📥</button></td></tr>
+                  <tr><td>Executivo Jan/26</td><td>01/02/26</td><td><span class="badge badge-danger">PDF</span></td><td><button class="btn btn-outline" style="padding:3px 8px;font-size:11px;" onclick="showToast('📥 Download iniciado!')">📥</button></td></tr>
+                  <tr><td>Anual 2025</td><td>05/01/26</td><td><span class="badge badge-gold">PDF+XLS</span></td><td><button class="btn btn-outline" style="padding:3px 8px;font-size:11px;" onclick="showToast('📥 Download iniciado!')">📥</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div><!-- end reports -->
+
+      <!-- ===== IA FINANCEIRA ===== -->
+      <div class="page" id="page-ai">
+        <div class="section-title">🤖 IA Financeira</div>
+        <div class="section-sub">Análise inteligente e insights automáticos para seu negócio</div>
+
+        <div class="grid-2" style="margin-bottom:20px;">
+          <div class="card">
+            <div class="card-header"><div class="card-title">💬 Chat Financeiro IA</div><span class="badge badge-success">● Online</span></div>
+            <div class="ai-chat">
+              <div class="ai-messages" id="aiMessages">
+                <div class="ai-msg">
+                  <div class="ai-avatar bot">🤖</div>
+                  <div class="ai-bubble bot">Olá! Sou a <strong>FinIA</strong>, sua assistente financeira inteligente. Analisei os dados da Empresa XYZ Ltda e tenho insights importantes para compartilhar. Como posso ajudar você hoje?</div>
+                </div>
+                <div class="ai-msg">
+                  <div class="ai-avatar bot">🤖</div>
+                  <div class="ai-bubble bot">📊 <strong>Resumo automático de Maio:</strong><br>• Faturamento: R$ 158.320 (+8,1%)<br>• Despesas: R$ 89.640 (-3,2%)<br>• Lucro: R$ 68.680 (margem 43,4%)<br>• Meta: 88% atingida — você está indo muito bem! 🎯</div>
+                </div>
+              </div>
+              <div class="ai-input-row">
+                <input class="ai-input" id="aiInput" placeholder="Pergunte sobre suas finanças... ex: qual meu gasto maior este mês?" onkeypress="if(event.key==='Enter')sendAIMessage()">
+                <button class="ai-send" onclick="sendAIMessage()">➤</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">💡 Insights Automáticos</div></div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div class="alert alert-success"><span class="alert-icon">📈</span><div><strong>+61,6% em 6 meses</strong> — Seu faturamento cresceu acima da média do setor (12%). Tendência sustentável identificada.</div></div>
+              <div class="alert alert-warning"><span class="alert-icon">⚠️</span><div><strong>Concentração de receita:</strong> 48% do faturamento vem de 2 clientes. Risco alto. Diversifique.</div></div>
+              <div class="alert alert-info"><span class="alert-icon">💡</span><div><strong>Gasto com SaaS +28%:</strong> Ferramentas de software aumentaram. Consolidar planos pode economizar R$ 800/mês.</div></div>
+              <div class="alert alert-success"><span class="alert-icon">✅</span><div><strong>Despesas operacionais -3,2%:</strong> As negociações com fornecedores geraram economia real este mês.</div></div>
+              <div class="alert alert-danger"><span class="alert-icon">🔔</span><div><strong>DAS vence 20/06:</strong> R$ 9.499 estimados. Provisione agora para evitar multa de 0,33%/dia.</div></div>
+              <div class="alert alert-info"><span class="alert-icon">🔮</span><div><strong>Previsão Junho:</strong> Com base no histórico, projeto R$ 171.000 em receitas e R$ 91.200 em despesas. Lucro estimado: R$ 79.800.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:20px;">
+          <div class="card-header"><div class="card-title">📊 Análise de Padrões de Gastos</div></div>
+          <div class="chart-wrap tall"><canvas id="patternChart"></canvas></div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-header"><div class="card-title">🔮 Previsão 90 Dias</div></div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="padding:12px;background:var(--success-bg);border-radius:var(--radius-sm);">
+                <div style="font-size:11px;color:var(--success);font-weight:700;margin-bottom:4px;">JUNHO 2026 (Projeção)</div>
+                <div style="font-size:16px;font-weight:800;color:var(--gray-700);">R$ 171.000</div>
+                <div style="font-size:11px;color:var(--gray-400);">Receita estimada +8%</div>
+              </div>
+              <div style="padding:12px;background:var(--info-bg);border-radius:var(--radius-sm);">
+                <div style="font-size:11px;color:var(--info);font-weight:700;margin-bottom:4px;">JULHO 2026 (Projeção)</div>
+                <div style="font-size:16px;font-weight:800;color:var(--gray-700);">R$ 182.000</div>
+                <div style="font-size:11px;color:var(--gray-400);">Crescimento sustentado</div>
+              </div>
+              <div style="padding:12px;background:var(--gold-pale);border-radius:var(--radius-sm);">
+                <div style="font-size:11px;color:#2E6B4F;font-weight:700;margin-bottom:4px;">AGOSTO 2026 (Projeção)</div>
+                <div style="font-size:16px;font-weight:800;color:var(--gray-700);">R$ 195.000</div>
+                <div style="font-size:11px;color:var(--gray-400);">Meta anual em alcance</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">⚠️ Riscos Detectados</div></div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="padding:10px;background:var(--danger-bg);border-radius:var(--radius-sm);font-size:12px;">
+                <div style="font-weight:700;color:var(--danger);margin-bottom:2px;">🔴 Risco Alto</div>
+                <div>Concentração em 2 clientes. Se um sair, -48% do faturamento imediato.</div>
+              </div>
+              <div style="padding:10px;background:var(--warning-bg);border-radius:var(--radius-sm);font-size:12px;">
+                <div style="font-weight:700;color:var(--warning);margin-bottom:2px;">🟡 Risco Médio</div>
+                <div>Reserva de emergência cobre apenas 2,2 meses de despesas. Ideal: 6 meses.</div>
+              </div>
+              <div style="padding:10px;background:var(--warning-bg);border-radius:var(--radius-sm);font-size:12px;">
+                <div style="font-weight:700;color:var(--warning);margin-bottom:2px;">🟡 Risco Médio</div>
+                <div>Folha de pagamento representa 42% das despesas. Alta alavancagem operacional.</div>
+              </div>
+              <div style="padding:10px;background:var(--success-bg);border-radius:var(--radius-sm);font-size:12px;">
+                <div style="font-weight:700;color:var(--success);margin-bottom:2px;">🟢 Risco Baixo</div>
+                <div>Inadimplência de clientes controlada: apenas R$ 8.200 em atraso (5%).</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">💰 Sugestões de Economia</div></div>
+            <div style="display:flex;flex-direction:column;gap:8px;font-size:12px;">
+              <div style="padding:10px;background:var(--gray-100);border-radius:var(--radius-sm);">
+                <div style="font-weight:700;color:var(--gray-700);">💡 Consolidar SaaS</div>
+                <div style="color:var(--success);font-weight:600;">Economia: R$ 800/mês</div>
+                <div style="color:var(--gray-500);">7 ferramentas identificadas com planos sobrepostos</div>
+              </div>
+              <div style="padding:10px;background:var(--gray-100);border-radius:var(--radius-sm);">
+                <div style="font-weight:700;color:var(--gray-700);">💡 Renegociar Aluguel</div>
+                <div style="color:var(--success);font-weight:600;">Economia: R$ 400/mês</div>
+                <div style="color:var(--gray-500);">Contrato vence em 3 meses. Janela de negociação.</div>
+              </div>
+              <div style="padding:10px;background:var(--gray-100);border-radius:var(--radius-sm);">
+                <div style="font-weight:700;color:var(--gray-700);">💡 Precificação +15%</div>
+                <div style="color:var(--success);font-weight:600;">Ganho: R$ 23.748/mês</div>
+                <div style="color:var(--gray-500);">Análise mostra que seu ticket está abaixo do mercado.</div>
+              </div>
+              <div style="padding:10px;background:var(--gray-100);border-radius:var(--radius-sm);">
+                <div style="font-weight:700;color:var(--gray-700);">💡 Marketing ROI</div>
+                <div style="color:var(--warning);font-weight:600;">Revisão necessária</div>
+                <div style="color:var(--gray-500);">R$ 5.800 em tráfego sem rastreio de conversão.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end ai -->
+
+      <!-- ===== CLIENTES ADMIN ===== -->
+      <div class="page" id="page-clients">
+        <div class="section-title">👥 Gestão de Clientes</div>
+        <div class="section-sub">Painel Administrador Master · Multiempresa SaaS</div>
+        <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;">
+          <div class="kpi-card"><div class="kpi-icon">👥</div><div class="kpi-label">Total Clientes</div><div class="kpi-value">24</div><div class="kpi-change up">▲ +3 este mês</div></div>
+          <div class="kpi-card"><div class="kpi-icon">🏢</div><div class="kpi-label">Clientes PJ</div><div class="kpi-value">16</div><div class="kpi-change neutral">67% da base</div></div>
+          <div class="kpi-card"><div class="kpi-icon">👤</div><div class="kpi-label">Clientes PF</div><div class="kpi-value">8</div><div class="kpi-change neutral">33% da base</div></div>
+          <div class="kpi-card"><div class="kpi-icon">💰</div><div class="kpi-label">MRR (SaaS)</div><div class="kpi-value">R$ 68.400</div><div class="kpi-change up">▲ +12%</div></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📋 Lista de Clientes</div>
+            <div style="display:flex;gap:8px;">
+              <input type="text" class="form-control" placeholder="🔍 Buscar cliente..." style="width:200px;padding:6px 10px;">
+              <button class="btn btn-primary" onclick="openModal('newClientModal')">+ Novo Cliente</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Cliente</th><th>Tipo</th><th>Plano</th><th>MRR</th><th>Status</th><th>Último Acesso</th><th>Ações</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Empresa XYZ Ltda</strong></td><td><span class="badge badge-gold">PJ</span></td><td>Premium 360°</td><td style="color:var(--gold);font-weight:700;">R$ 3.500</td><td><span class="badge badge-success">Ativo</span></td><td>Agora</td><td><button class="btn btn-primary" style="padding:4px 10px;font-size:11px;" onclick="switchClient('Empresa XYZ Ltda','PJ')">Acessar</button></td></tr>
+                <tr><td><strong>Maria Fernanda Costa</strong></td><td><span class="badge badge-info">PF</span></td><td>Mentoria PF</td><td style="color:var(--gold);font-weight:700;">R$ 1.800</td><td><span class="badge badge-success">Ativo</span></td><td>Há 2h</td><td><button class="btn btn-primary" style="padding:4px 10px;font-size:11px;" onclick="switchClient('Maria Fernanda Costa','PF')">Acessar</button></td></tr>
+                <tr><td><strong>Tech Solutions S/A</strong></td><td><span class="badge badge-gold">PJ</span></td><td>Assessoria Pro</td><td style="color:var(--gold);font-weight:700;">R$ 5.200</td><td><span class="badge badge-success">Ativo</span></td><td>Ontem</td><td><button class="btn btn-primary" style="padding:4px 10px;font-size:11px;" onclick="switchClient('Tech Solutions SA','PJ')">Acessar</button></td></tr>
+                <tr><td><strong>Roberto Silva</strong></td><td><span class="badge badge-info">PF</span></td><td>Mentoria PF</td><td style="color:var(--gold);font-weight:700;">R$ 1.200</td><td><span class="badge badge-success">Ativo</span></td><td>2 dias</td><td><button class="btn btn-primary" style="padding:4px 10px;font-size:11px;" onclick="switchClient('Roberto Silva','PF')">Acessar</button></td></tr>
+                <tr><td><strong>Grupo Omega S/A</strong></td><td><span class="badge badge-gold">PJ</span></td><td>Enterprise</td><td style="color:var(--gold);font-weight:700;">R$ 8.900</td><td><span class="badge badge-success">Ativo</span></td><td>3 dias</td><td><button class="btn btn-primary" style="padding:4px 10px;font-size:11px;" onclick="switchClient('Grupo Omega SA','PJ')">Acessar</button></td></tr>
+                <tr><td><strong>Ana Paula Mendes</strong></td><td><span class="badge badge-info">PF</span></td><td>Mentoria Basic</td><td style="color:var(--gold);font-weight:700;">R$ 800</td><td><span class="badge badge-warning">Trial</span></td><td>5 dias</td><td><button class="btn btn-primary" style="padding:4px 10px;font-size:11px;" onclick="switchClient('Ana Paula Mendes','PF')">Acessar</button></td></tr>
+                <tr><td><strong>Startup Alpha Ltda</strong></td><td><span class="badge badge-gold">PJ</span></td><td>Assessoria Pro</td><td style="color:var(--gold);font-weight:700;">R$ 4.100</td><td><span class="badge badge-danger">Inadimplente</span></td><td>15 dias</td><td><button class="btn btn-danger" style="padding:4px 10px;font-size:11px;" onclick="showToast('📱 Cobrança enviada!')">Cobrar</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!-- end clients -->
+
+      <!-- ===== CONFIGURAÇÕES ===== -->
+      <div class="page" id="page-settings">
+        <div class="section-title">⚙️ Configurações</div>
+        <div class="section-sub">Preferências, integrações e segurança do sistema</div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><div class="card-title">👤 Perfil do Usuário</div></div>
+            <div class="form-group"><label class="form-label">Nome Completo</label><input type="text" class="form-control" value="Admin Master"></div>
+            <div class="form-group"><label class="form-label">E-mail</label><input type="email" class="form-control" value="admin@finpro.com.br"></div>
+            <div class="form-group"><label class="form-label">Telefone</label><input type="text" class="form-control" value="(11) 99999-9999"></div>
+            <div class="form-group"><label class="form-label">Cargo</label><input type="text" class="form-control" value="Assessor Financeiro Master"></div>
+            <button class="btn btn-primary" onclick="showToast('✅ Perfil atualizado com sucesso!')">💾 Salvar Alterações</button>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">🔗 Integrações</div></div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;background:var(--gray-100);border-radius:var(--radius-sm);">
+                <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">🏦</span><div><div style="font-weight:600;font-size:13px;">Open Banking</div><div style="font-size:11px;color:var(--gray-400);">Conexão automática com bancos</div></div></div>
+                <span class="badge badge-success">Conectado</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;background:var(--gray-100);border-radius:var(--radius-sm);">
+                <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">📱</span><div><div style="font-weight:600;font-size:13px;">WhatsApp Business API</div><div style="font-size:11px;color:var(--gray-400);">Lançamentos e notificações</div></div></div>
+                <button class="btn btn-primary" style="font-size:11px;padding:5px 10px;" onclick="showToast('📱 Configuração WhatsApp iniciada!')">Configurar</button>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;background:var(--gray-100);border-radius:var(--radius-sm);">
+                <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">📧</span><div><div style="font-weight:600;font-size:13px;">E-mail Automático</div><div style="font-size:11px;color:var(--gray-400);">Relatórios e cobranças</div></div></div>
+                <span class="badge badge-success">Ativo</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;background:var(--gray-100);border-radius:var(--radius-sm);">
+                <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">📊</span><div><div style="font-weight:600;font-size:13px;">Contabilidade / ERP</div><div style="font-size:11px;color:var(--gray-400);">Omie, ContaAzul, Nibo</div></div></div>
+                <button class="btn btn-outline" style="font-size:11px;padding:5px 10px;">Conectar</button>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;background:var(--gray-100);border-radius:var(--radius-sm);">
+                <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">🤖</span><div><div style="font-weight:600;font-size:13px;">IA Financeira (GPT-4)</div><div style="font-size:11px;color:var(--gray-400);">Análise e insights automáticos</div></div></div>
+                <span class="badge badge-success">Ativo</span>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">🔔 Notificações</div></div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+                <span style="font-size:13px;">Vencimentos de contas</span>
+                <div class="dark-toggle on"></div>
+              </label>
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+                <span style="font-size:13px;">Novas entradas e saídas</span>
+                <div class="dark-toggle on"></div>
+              </label>
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+                <span style="font-size:13px;">Insights da IA Financeira</span>
+                <div class="dark-toggle on"></div>
+              </label>
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+                <span style="font-size:13px;">Relatórios mensais automáticos</span>
+                <div class="dark-toggle on"></div>
+              </label>
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+                <span style="font-size:13px;">Alertas de metas</span>
+                <div class="dark-toggle"></div>
+              </label>
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+                <span style="font-size:13px;">WhatsApp (em breve)</span>
+                <div class="dark-toggle"></div>
+              </label>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">🔒 Segurança</div></div>
+            <div class="form-group"><label class="form-label">Senha Atual</label><input type="password" class="form-control" placeholder="••••••••"></div>
+            <div class="form-group"><label class="form-label">Nova Senha</label><input type="password" class="form-control" placeholder="••••••••"></div>
+            <div class="form-group"><label class="form-label">Confirmar Senha</label><input type="password" class="form-control" placeholder="••••••••"></div>
+            <hr class="sep">
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+                <span style="font-size:13px;">Autenticação em 2 fatores (2FA)</span>
+                <div class="dark-toggle on"></div>
+              </label>
+              <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+                <span style="font-size:13px;">Log de atividades</span>
+                <div class="dark-toggle on"></div>
+              </label>
+            </div>
+            <hr class="sep">
+            <button class="btn btn-primary" onclick="showToast('🔒 Senha alterada com sucesso!')">🔒 Atualizar Senha</button>
+          </div>
+        </div>
+      </div><!-- end settings -->
+
+    </div><!-- end page-content -->
+  </div><!-- end main-content -->
+</div><!-- end app-layout -->
+
+<!-- MODALS -->
+<div class="modal-overlay" id="clientModal" onclick="if(event.target===this)closeModal('clientModal')">
+  <div class="modal">
+    <div class="modal-title">🔄 Alternar Cliente</div>
+    <div class="modal-sub">Selecione o cliente para acessar como administrador</div>
+    <div style="display:flex;flex-direction:column;gap:8px;max-height:300px;overflow-y:auto;">
+      <div onclick="switchClient('Empresa XYZ Ltda','PJ');closeModal('clientModal')" style="padding:12px;border:1px solid var(--gold);border-radius:var(--radius-sm);cursor:pointer;background:var(--gold-pale);">
+        <div style="font-weight:700;">Empresa XYZ Ltda</div>
+        <div style="font-size:11px;color:var(--gray-400);">PJ · CNPJ: 12.345.678/0001-99 · Premium 360°</div>
+      </div>
+      <div onclick="switchClient('Maria Fernanda Costa','PF');closeModal('clientModal')" style="padding:12px;border:1px solid var(--card-border);border-radius:var(--radius-sm);cursor:pointer;">
+        <div style="font-weight:700;">Maria Fernanda Costa</div>
+        <div style="font-size:11px;color:var(--gray-400);">PF · CPF: ***.***.***-88 · Mentoria PF</div>
+      </div>
+      <div onclick="switchClient('Tech Solutions SA','PJ');closeModal('clientModal')" style="padding:12px;border:1px solid var(--card-border);border-radius:var(--radius-sm);cursor:pointer;">
+        <div style="font-weight:700;">Tech Solutions S/A</div>
+        <div style="font-size:11px;color:var(--gray-400);">PJ · CNPJ: 98.765.432/0001-10 · Assessoria Pro</div>
+      </div>
+      <div onclick="switchClient('Grupo Omega SA','PJ');closeModal('clientModal')" style="padding:12px;border:1px solid var(--card-border);border-radius:var(--radius-sm);cursor:pointer;">
+        <div style="font-weight:700;">Grupo Omega S/A</div>
+        <div style="font-size:11px;color:var(--gray-400);">PJ · CNPJ: 55.444.333/0001-22 · Enterprise</div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-outline" onclick="closeModal('clientModal')">Cancelar</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="lancamentoModal" onclick="if(event.target===this)closeModal('lancamentoModal')">
+  <div class="modal">
+    <div class="modal-title">💰 Novo Lançamento</div>
+    <div class="modal-sub">Registre entradas, saídas e transferências</div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label class="form-label">Tipo</label>
+        <select class="form-control">
+          <option>🟢 Receita / Entrada</option>
+          <option>🔴 Despesa / Saída</option>
+          <option>↔️ Transferência</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Data</label>
+        <input type="date" class="form-control" value="2026-05-22">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Descrição</label>
+      <input type="text" class="form-control" placeholder="Ex: Consultoria Financeira — Cliente A">
+    </div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label class="form-label">Valor (R$)</label>
+        <input type="number" class="form-control" placeholder="0,00">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Forma de Pagamento</label>
+        <select class="form-control">
+          <option>PIX</option>
+          <option>TED/DOC</option>
+          <option>Boleto</option>
+          <option>Cartão</option>
+          <option>Dinheiro</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Categoria</label>
+      <select class="form-control">
+        <option>Consultoria</option>
+        <option>Mentoria</option>
+        <option>Assessoria</option>
+        <option>Marketing</option>
+        <option>TI / Software</option>
+        <option>RH / Pessoal</option>
+        <option>Impostos</option>
+        <option>Aluguel</option>
+        <option>Outros</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Observações</label>
+      <input type="text" class="form-control" placeholder="Observações adicionais...">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('lancamentoModal')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('lancamentoModal');showToast('✅ Lançamento registrado com sucesso!')">💾 Salvar Lançamento</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="newClientModal" onclick="if(event.target===this)closeModal('newClientModal')">
+  <div class="modal">
+    <div class="modal-title">👤 Novo Cliente</div>
+    <div class="modal-sub">Cadastrar novo cliente na plataforma CG Finanças</div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label class="form-label">Tipo</label>
+        <select class="form-control">
+          <option>🏢 Pessoa Jurídica (PJ)</option>
+          <option>👤 Pessoa Física (PF)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Plano</label>
+        <select class="form-control">
+          <option>Mentoria Basic</option>
+          <option>Mentoria PF</option>
+          <option>Assessoria Pro</option>
+          <option>Premium 360°</option>
+          <option>Enterprise</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Razão Social / Nome Completo</label>
+      <input type="text" class="form-control" placeholder="Nome do cliente">
+    </div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label class="form-label">CNPJ / CPF</label>
+        <input type="text" class="form-control" placeholder="00.000.000/0001-00">
+      </div>
+      <div class="form-group">
+        <label class="form-label">E-mail de Acesso</label>
+        <input type="email" class="form-control" placeholder="cliente@email.com">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Mensalidade (R$)</label>
+      <input type="number" class="form-control" placeholder="Valor mensal">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('newClientModal')">Cancelar</button>
+      <button class="btn btn-primary" onclick="closeModal('newClientModal');showToast('✅ Cliente cadastrado! Acesso enviado por e-mail.')">🚀 Cadastrar Cliente</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ===== STATE =====
+let currentMode = 'PJ';
+let isDark = false;
+
+// ===== LOGIN =====
+function doLogin() {
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('appLayout').style.display = 'flex';
+  initCharts();
+  renderCalendar();
+  showToast('👋 Bem-vindo ao Hub Estratégico CG Finanças!');
+}
+function loginAs(type) {
+  setMode(type.toUpperCase());
+  doLogin();
+}
+function doLogout() {
+  document.getElementById('appLayout').style.display = 'none';
+  document.getElementById('loginPage').style.display = 'flex';
+  showToast('👋 Até logo! Sessão encerrada com segurança.');
+}
+
+// ===== NAVIGATION =====
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  const page = document.getElementById('page-' + pageId);
+  if (page) page.classList.add('active');
+  const titles = {
+    dashboard: 'Dashboard', cashflow: 'Fluxo de Caixa', dre: 'DRE — Demonstrativo de Resultados',
+    payables: 'Contas a Pagar', receivables: 'Contas a Receber', cards: 'Gestão de Cartões',
+    conciliation: 'Conciliação Bancária', mentoring: 'Mentoria & Assessoria', reports: 'Relatórios',
+    ai: 'IA Financeira', clients: 'Gestão de Clientes', settings: 'Configurações'
+  };
+  document.getElementById('pageTitle').textContent = titles[pageId] || pageId;
+  document.querySelectorAll('.nav-item').forEach(item => {
+    if (item.getAttribute('onclick') && item.getAttribute('onclick').includes("'"+pageId+"'")) {
+      item.classList.add('active');
+    }
+  });
+  if (pageId === 'dre') { setTimeout(() => { renderDRECharts(); }, 100); }
+  if (pageId === 'ai') { setTimeout(() => { renderPatternChart(); }, 100); }
+  if (pageId === 'cashflow') { setTimeout(() => { renderCashflowDetail(); }, 100); }
+}
+
+// ===== MODE TOGGLE =====
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById('btnPJ').classList.toggle('active', mode === 'PJ');
+  document.getElementById('btnPF').classList.toggle('active', mode === 'PF');
+  document.getElementById('activeType').textContent = mode;
+  const pfModules = ['Centro de Custos', 'DRE'];
+  document.getElementById('adminSection').style.display = 'block';
+  document.getElementById('adminClients').style.display = 'flex';
+  showToast(`🔄 Modo ${mode} ativado! Interface adaptada.`);
+}
+
+// ===== DARK MODE =====
+function toggleDark() {
+  isDark = !isDark;
+  document.body.classList.toggle('dark', isDark);
+  document.getElementById('darkToggle').classList.toggle('on', isDark);
+  showToast(isDark ? '🌙 Modo escuro ativado!' : '☀️ Modo claro ativado!');
+}
+
+// ===== CLIENT SWITCHER =====
+function switchClient(name, type) {
+  document.getElementById('activeName').textContent = name;
+  document.getElementById('activeType').textContent = type;
+  setMode(type);
+  showToast(`👤 Acessando dados de: ${name}`);
+}
+
+// ===== MODAL =====
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+// ===== TOAST =====
+function showToast(msg) {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = msg;
+  container.appendChild(toast);
+  setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100px)'; toast.style.transition = 'all 0.3s'; setTimeout(() => toast.remove(), 300); }, 3500);
+}
+
+// ===== CALENDAR =====
+function renderCalendar() {
+  const grid = document.getElementById('calendarGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  const evDays = [22, 25, 28, 30];
+  for (let i = 1; i <= 31; i++) {
+    const d = document.createElement('div');
+    d.className = 'cal-day' + (i === 22 ? ' today' : '') + (evDays.includes(i) ? ' has-event' : '');
+    d.textContent = i;
+    d.onclick = () => showToast(`📅 Dia ${i}/05/2026 — ${evDays.includes(i) ? 'Evento financeiro agendado!' : 'Sem eventos'}`);
+    grid.appendChild(d);
+  }
+}
+
+// ===== AI CHAT =====
+const aiResponses = [
+  '📊 Analisando seus dados financeiros... Seu lucro de maio foi R$ 68.680 com margem de 43,4%, acima da média do setor (35%). Excelente resultado! 🎉',
+  '⚠️ Identifiquei que suas despesas com RH representam 42% do total. Uma otimização pode aumentar sua margem em até 5 pontos percentuais.',
+  '💡 Baseado no histórico dos últimos 6 meses, projeto que você atingirá a meta de R$ 180k em faturamento em Junho se mantiver o ritmo atual.',
+  '🔮 Detectei um padrão: seus meses de maior faturamento são março, junho e setembro. Recomendo provisionar reservas nos meses anteriores.',
+  '💰 Sua fatura do cartão Nubank PJ de R$ 18.240 representa 11,5% do faturamento. Está dentro do recomendável (máx. 15%). Mantenha esse controle!',
+  '📈 O ROI do seu investimento em marketing (R$ 5.800) gerou aproximadamente R$ 31.200 em receita rastreável. ROI de 438% — muito bom!',
+  '🏦 Recomendo manter pelo menos R$ 89.640 (equivalente a 1 mês de despesas) como reserva de emergência. Atualmente você tem R$ 62.000 (69% da meta).'
+];
+let aiIdx = 0;
+
+function sendAIMessage() {
+  const input = document.getElementById('aiInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  const messages = document.getElementById('aiMessages');
+  messages.innerHTML += `<div class="ai-msg user"><div class="ai-avatar user">👤</div><div class="ai-bubble user">${msg}</div></div>`;
+  input.value = '';
+  const typing = document.createElement('div');
+  typing.className = 'ai-msg';
+  typing.innerHTML = `<div class="ai-avatar bot">🤖</div><div class="ai-bubble bot"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>`;
+  messages.appendChild(typing);
+  messages.scrollTop = messages.scrollHeight;
+  setTimeout(() => {
+    typing.remove();
+    const resp = aiResponses[aiIdx % aiResponses.length]; aiIdx++;
+    messages.innerHTML += `<div class="ai-msg"><div class="ai-avatar bot">🤖</div><div class="ai-bubble bot">${resp}</div></div>`;
+    messages.scrollTop = messages.scrollHeight;
+  }, 1200);
+}
+
+// ===== CONCILIATION SIM =====
+function simulateConciliation() {
+  showToast('🤖 IA processando extrato bancário... 247 lançamentos identificados!');
+  setTimeout(() => showToast('✅ Conciliação concluída! 211 itens categorizados automaticamente (85%).'), 2000);
+}
+
+// ===== CHARTS =====
+const GOLD = '#C9A840'; const GOLD2 = '#D4B84A'; const BROWN = '#1B3A2A';
+const GREEN = '#2E6B4F'; const RED = '#9B2226'; const BLUE = '#1D4E89';
+const BEIGE = '#F0EAD6';
+
+const chartDefaults = {
+  responsive: true, maintainAspectRatio: false,
+  plugins: { legend: { labels: { font: { size: 11, family: 'Inter' }, color: '#5A5550', padding: 16 } } },
+  scales: {
+    x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 11 }, color: '#A09C94' } },
+    y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 11 }, color: '#A09C94', callback: v => 'R$ ' + (v/1000).toFixed(0) + 'k' } }
+  }
+};
+
+function initCharts() {
+  // Cashflow Dashboard
+  const cf = document.getElementById('cashflowChart');
+  if (cf) new Chart(cf, {
+    type: 'bar',
+    data: {
+      labels: ['Dez/25', 'Jan/26', 'Fev/26', 'Mar/26', 'Abr/26', 'Mai/26'],
+      datasets: [
+        { label: 'Receitas', data: [98000, 112000, 125000, 138000, 146500, 158320], backgroundColor: 'rgba(46,107,79,0.8)', borderRadius: 6 },
+        { label: 'Despesas', data: [71000, 78000, 82000, 86000, 92500, 89640], backgroundColor: 'rgba(155,34,38,0.6)', borderRadius: 6 },
+        { label: 'Lucro', data: [27000, 34000, 43000, 52000, 54000, 68680], backgroundColor: 'rgba(201,168,64,0.85)', borderRadius: 6 }
+      ]
+    },
+    options: { ...chartDefaults, plugins: { ...chartDefaults.plugins } }
+  });
+
+  // Expenses Donut
+  const ex = document.getElementById('expensesChart');
+  if (ex) new Chart(ex, {
+    type: 'doughnut',
+    data: {
+      labels: ['RH/Pessoal', 'Marketing', 'TI/Software', 'Aluguel', 'Impostos', 'Outros'],
+      datasets: [{ data: [38200, 8400, 3200, 6800, 9499, 23541], backgroundColor: ['#1B3A2A', GOLD, '#2E6B4F', '#A07E20', RED, '#8A9E94'], borderWidth: 3, borderColor: '#fff', hoverOffset: 6 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '65%',
+      plugins: { legend: { position: 'right', labels: { font: { size: 11 }, padding: 12 } } }
+    }
+  });
+}
+
+function renderDRECharts() {
+  const rc = document.getElementById('dreRevenueChart');
+  if (rc && !rc.chart) {
+    rc.chart = new Chart(rc, {
+      type: 'doughnut',
+      data: {
+        labels: ['Consultoria', 'Mentoria PF', 'Assessoria PJ', 'Treinamentos', 'Relatórios', 'Outros'],
+        datasets: [{ data: [52000, 31500, 28900, 19200, 14800, 11920], backgroundColor: ['#1B3A2A', GOLD, '#2E6B4F', '#A07E20', '#4A7A60', '#C0A030'], borderWidth: 3, borderColor: '#fff' }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, cutout: '60%', plugins: { legend: { position: 'right', labels: { font: { size: 10 }, padding: 8 } } } }
+    });
+  }
+  const ec = document.getElementById('ebitdaChart');
+  if (ec && !ec.chart) {
+    ec.chart = new Chart(ec, {
+      type: 'line',
+      data: {
+        labels: ['Dez/25','Jan/26','Fev/26','Mar/26','Abr/26','Mai/26'],
+        datasets: [{
+          label: 'EBITDA', data: [27000, 34000, 43000, 52000, 54000, 88181],
+          borderColor: GOLD, backgroundColor: 'rgba(201,168,64,0.1)', fill: true, tension: 0.4, pointBackgroundColor: GOLD, pointRadius: 5
+        }]
+      },
+      options: { ...chartDefaults }
+    });
+  }
+}
+
+function renderPatternChart() {
+  const pc = document.getElementById('patternChart');
+  if (pc && !pc.chart) {
+    pc.chart = new Chart(pc, {
+      type: 'radar',
+      data: {
+        labels: ['Consultoria','Marketing','TI/Software','RH','Impostos','Aluguel','Outros'],
+        datasets: [
+          { label: 'Maio/26', data: [158,42,32,38,47,34,22], backgroundColor: 'rgba(201,168,64,0.15)', borderColor: GOLD, pointBackgroundColor: GOLD },
+          { label: 'Abril/26', data: [146,38,28,42,45,34,20], backgroundColor: 'rgba(45,106,79,0.1)', borderColor: GREEN, pointBackgroundColor: GREEN }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { font: { size: 11 } } } }, scales: { r: { ticks: { font: { size: 10 } } } } }
+    });
+  }
+}
+
+function renderCashflowDetail() {
+  const c = document.getElementById('cashflowDetailChart');
+  if (c && !c.chart) {
+    c.chart = new Chart(c, {
+      type: 'line',
+      data: {
+        labels: ['Dez/25','Jan/26','Fev/26','Mar/26','Abr/26','Mai/26'],
+        datasets: [
+          { label: 'Receitas', data: [98000,112000,125000,138000,146500,158320], borderColor: GREEN, backgroundColor: 'rgba(45,106,79,0.08)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: GREEN },
+          { label: 'Despesas', data: [71000,78000,82000,86000,92500,89640], borderColor: RED, backgroundColor: 'rgba(155,34,38,0.08)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: RED },
+          { label: 'Lucro Líquido', data: [27000,34000,43000,52000,54000,68680], borderColor: GOLD, backgroundColor: 'rgba(201,168,64,0.08)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: GOLD }
+        ]
+      },
+      options: { ...chartDefaults }
+    });
+  }
+}
+
+// ===== KEYBOARD SHORTCUTS =====
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open')); }
+  if (e.ctrlKey && e.key === 'n') { e.preventDefault(); openModal('lancamentoModal'); }
+});
+</script>
+</body>
+</html>
